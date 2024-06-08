@@ -13,15 +13,156 @@
     <title>RentCar</title>
     <style>
       .navbar-custom {
-        background-color: #ffffff00;
+        background-color: transparent; /* Transparent background */
+      }
+
+      .navbar-brand span {
+        color: #ffffff; /* White color for the brand text */
+      }
+
+      .nav-link {
+        color: #010101; /* Black color for the nav links */
+        transition: color 0.3s ease;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: #f8f9fa; /* Light grey color on hover and active */
       }
 
       .btn-custom {
-        background-color: #ffffff00;
+        background-color: #ffffff; /* White background for Sign In button */
       }
-      .card-custom {
-        width: 400px;
-        height: 600px;
+
+      .btn-custom:hover {
+        background-color: #d7d7d7; /* Light grey background on hover */
+        color: #004080; /* Dark blue text color for Sign In button */
+      }
+
+      .btn-primary {
+        background-color: #004080; /* Dark blue background for Sign Up button */
+        border-color: #004080; /* Dark blue border for Sign Up button */
+      }
+
+      .btn-primary:hover {
+        background-color: #003366; /* Darker blue background on hover */
+        border-color: #003366; /* Darker blue border on hover */
+      }
+
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%288, 8, 8, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+      }
+
+      .home,
+      .hiw,
+      .top-rate,
+      .review,
+      .footer {
+        padding: 0;
+        max-width: 2000px;
+      }
+
+      .home {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container-1 {
+        flex: 1;
+        padding: 20px;
+        max-width: 3000px;
+      }
+
+      .container-2 {
+        flex: 1;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .container-2 img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .hiw .container-hiw {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .hiw .container-hiw > div {
+        flex: 1;
+        text-align: center;
+        min-width: 150px;
+      }
+
+      .top-rate .container-top-rate {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 20px;
+      }
+
+      .top-rate .card {
+        flex: 1 1 calc(33.333% - 40px);
+
+        max-width: 300px;
+      }
+
+      .review {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .review .card {
+        flex: 1 1 calc(33.333% - 40px);
+        max-width: 300px;
+      }
+
+      .footer .section-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer .image-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .footer .address-container {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      @media (max-width: 768px) {
+        .home {
+          flex-direction: column;
+        }
+
+        .hiw .container-hiw {
+          flex-direction: column;
+        }
+
+        .top-rate .card,
+        .review .card {
+          flex: 1 1 100%;
+        }
+
+        .footer .section-container {
+          flex-direction: column;
+        }
       }
     </style>
   </head>
@@ -30,7 +171,7 @@
     <!-- Start Navbar -->
     <nav
       class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top el-navbar"
-      style="background-color: #ffffff00"
+      style="background-color: none"
     >
       <div class="container-fluid">
         <a class="navbar-brand" href="#"><span>PANDAWA</span> RentCar</a>
@@ -45,21 +186,21 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="  navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link" aria-current="page" href="#home">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Catalog</a>
+              <a class="nav-link" href="#catalog">Catalog</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Review</a>
+              <a class="nav-link" href="#review">Review</a>
             </li>
           </ul>
           <div class="d-grid gap-2 d-md-block ms-auto gripper-custom">
-            <button class="btn btn-custom" type="button">Sign In</button>
             <button class="btn btn-primary" type="button">Sign Up</button>
+            <button class="btn btn-custom" type="button">Sign In</button>
           </div>
         </div>
       </div>
@@ -67,7 +208,7 @@
     <!-- End Navbar -->
 
     <!-- Start Home -->
-    <nav class="home d-flex">
+    <nav id="home" class="home d-flex">
       <div class="container-1">
         <div class="container-article">
           <article><b>Fast and Easy Way to Rent Car</b></article>
@@ -80,56 +221,56 @@
         </div>
       </div>
       <div class="container-2">
-        <img src="/assets/pajero.png" alt="Pajero" />
+        <img src="assets/pajero.png" alt="Pajero" />
       </div>
     </nav>
     <!-- End Home -->
 
     <!-- Start How it work -->
     <nav class="hiw">
-      <h2>How It Work</h2>
+      <h2 style="line-height: 2.5">How It Work</h2>
       <div class="container-hiw">
         <div class="register">
-          <img src="/assets/register-hiw.svg" alt="register" />register
+          <img src="assets/register-hiw.svg" alt="register" />register
         </div>
-        <img src="/assets/Arrow_right_long.svg" alt="arrow" />
+        <img src="assets/Arrow_right_long.svg" alt="arrow" />
         <div class="catalog">
-          <img src="/assets/katalog-hiw_fill.png" alt="catalog" />See Catalog
+          <img src="assets/katalog-hiw_fill.png" alt="catalog" />See Catalog
         </div>
-        <img src="/assets/Arrow_right_long.svg" alt="arrow" />
+        <img src="assets/Arrow_right_long.svg" alt="arrow" />
         <div class="date">
-          <img src="/assets/date.png" alt="date" />Pick-Up Date
+          <img src="assets/date.png" alt="date" />Pick-Up Date
         </div>
-        <img src="/assets/Arrow_right_long.svg" alt="arrow" />
+        <img src="assets/Arrow_right_long.svg" alt="arrow" />
         <div class="car">
-          <img src="/assets/car-hiw.svg" alt="car" />Book Your Car
+          <img src="assets/car-hiw.svg" alt="car" />Book Your Car
         </div>
       </div>
     </nav>
-    <!-- End Hoow it work -->
+    <!-- End How it work -->
 
     <!-- start top rate -->
-    <nav class="top-rate">
-      <h1>TOP RATE CARS</h1>
+    <nav id="catalog" class="top-rate">
+      <h1>TOP RATED CARS</h1>
       <div class="container-top-rate">
         <div class="card h-100 card-custom" style="background: #4bb6d6">
           <img
-            src="/assets/avanza.png"
+            src="assets/avanza.png"
             class="card-img-top img-custom"
-            alt="..."
+            alt="Avanza"
           />
           <h2>Avanza</h2>
           <div class="cars-detail">
             <div>
-              <img src="/assets/Group.svg" alt="" />
+              <img src="assets/Group.svg" alt="" />
               <span>4</span>
             </div>
             <div>
-              <img src="/assets/Pressure.png" alt="" />
+              <img src="assets/Pressure.png" alt="" />
               <span>120 Km/H</span>
             </div>
             <div>
-              <img src="/assets/Setting_line.png" alt="" />
+              <img src="assets/Setting_line.png" alt="" />
               <time datetime="2024-04-17">17-4-2024</time>
             </div>
           </div>
@@ -137,22 +278,22 @@
         </div>
         <div class="card h-100 card-custom" style="background: #4bb6d6">
           <img
-            src="/assets/sigra.png"
+            src="assets/sigra.png"
             class="card-img-top img-custom"
-            alt="..."
+            alt="Sigra"
           />
           <h2>Sigra</h2>
           <div class="cars-detail">
             <div>
-              <img src="/assets/Group.svg" alt="" />
+              <img src="assets/Group.svg" alt="" />
               <span>4</span>
             </div>
             <div>
-              <img src="/assets/Pressure.png" alt="" />
+              <img src="assets/Pressure.png" alt="" />
               <span>120 Km/H</span>
             </div>
             <div>
-              <img src="/assets/Setting_line.png" alt="" />
+              <img src="assets/Setting_line.png" alt="" />
               <time datetime="2024-04-17">17-4-2024</time>
             </div>
           </div>
@@ -160,22 +301,22 @@
         </div>
         <div class="card h-100 card-custom" style="background: #4bb6d6">
           <img
-            src="/assets/kijang.png"
+            src="assets/kijang.png"
             class="card-img-top img-custom"
-            alt="..."
+            alt="Kijang"
           />
           <h2>Kijang</h2>
           <div class="cars-detail">
             <div>
-              <img src="/assets/Group.svg" alt="" />
+              <img src="assets/Group.svg" alt="" />
               <span>4</span>
             </div>
             <div>
-              <img src="/assets/Pressure.png" alt="" />
+              <img src="assets/Pressure.png" alt="" />
               <span>120 Km/H</span>
             </div>
             <div>
-              <img src="/assets/Setting_line.png" alt="" />
+              <img src="assets/Setting_line.png" alt="" />
               <time datetime="2024-04-17">17-4-2024</time>
             </div>
           </div>
@@ -186,145 +327,389 @@
     <!-- end top rate -->
 
     <!-- start Review -->
-    <nav id="Review" class="review">
-      <div class="card card-custom">
-        <div class="sec">
+    <nav
+      id="review"
+      class="review"
+      style="
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 100px;
+        background-color: #f5f5f5;
+        height: fit-content;
+      "
+    >
+      <div
+        class="card card-custom"
+        style="
+          background-color: #fff;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          width: 300px;
+          padding: 20px;
+          transition: transform 0.3s;
+        "
+      >
+        <div
+          class="sec"
+          style="display: flex; align-items: center; margin-bottom: 15px"
+        >
           <div>
-            <img class="card-img-top" src="/assets/Steven.png" alt="" />
+            <img
+              class="card-img-top"
+              src="assets/Steven.png"
+              alt="Steven"
+              style="
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+                margin-right: 15px;
+              "
+            />
           </div>
           <div>
-            <h3><label for="name">Steven</label></h3>
-            <h5><label for="Member">Gold Member</label></h5>
+            <h3 style="font-size: 1.2em; color: #333">
+              <label for="name">Steven</label>
+            </h3>
+            <h5 style="font-size: 0.9em; color: #777">
+              <label for="Member">Gold Member</label>
+            </h5>
           </div>
         </div>
-        <p>
+        <p style="color: #555; line-height: 1.5">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis
           mollitia quod at quasi ab ratione, facere impedit sed nisi,
-          accusantium eligendi omnis. Quas vitae cupiditate soluta dolorum,
-          odit corporis possimus.
+          accusantium eligendi omnis. Quas vitae cupiditate soluta dolorum, odit
+          corporis possimus.
         </p>
       </div>
-      <div class="card card-custom">
-        <div class="sec">
+      <div
+        class="card card-custom"
+        style="
+          background-color: #fff;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          width: 300px;
+          padding: 20px;
+          transition: transform 0.3s;
+        "
+      >
+        <div
+          class="sec"
+          style="display: flex; align-items: center; margin-bottom: 15px"
+        >
           <div>
-            <img class="card-img-top" src="/assets/Steven.png" alt="" />
+            <img
+              class="card-img-top"
+              src="assets/Steven.png"
+              alt="Steven"
+              style="
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+                margin-right: 15px;
+              "
+            />
           </div>
           <div>
-            <h3><label for="name">Steven</label></h3>
-            <h5><label for="Member">Gold Member</label></h5>
+            <h3 style="font-size: 1.2em; color: #333">
+              <label for="name">Steven</label>
+            </h3>
+            <h5 style="font-size: 0.9em; color: #777">
+              <label for="Member">Gold Member</label>
+            </h5>
           </div>
         </div>
-        <p>
+        <p style="color: #555; line-height: 1.5">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis
           mollitia quod at quasi ab ratione, facere impedit sed nisi,
-          accusantium eligendi omnis. Quas vitae cupiditate soluta dolorum,
-          odit corporis possimus.
+          accusantium eligendi omnis. Quas vitae cupiditate soluta dolorum, odit
+          corporis possimus.
         </p>
       </div>
-      <div class="card card-custom">
-        <div class="sec">
+      <div
+        class="card card-custom"
+        style="
+          background-color: #fff;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          width: 300px;
+          padding: 20px;
+          transition: transform 0.3s;
+        "
+      >
+        <div
+          class="sec"
+          style="display: flex; align-items: center; margin-bottom: 15px"
+        >
           <div>
-            <img class="card-img-top" src="/assets/Steven.png" alt="" />
+            <img
+              class="card-img-top"
+              src="assets/Steven.png"
+              alt="Steven"
+              style="
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+                margin-right: 15px;
+              "
+            />
           </div>
           <div>
-            <h3><label for="name">Steven</label></h3>
-            <h5><label for="Member">Gold Member</label></h5>
+            <h3 style="font-size: 1.2em; color: #333">
+              <label for="name">Steven</label>
+            </h3>
+            <h5 style="font-size: 0.9em; color: #777">
+              <label for="Member">Gold Member</label>
+            </h5>
           </div>
         </div>
-        <p>
+        <p style="color: #555; line-height: 1.5">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis
           mollitia quod at quasi ab ratione, facere impedit sed nisi,
-          accusantium eligendi omnis. Quas vitae cupiditate soluta dolorum,
-          odit corporis possimus.
+          accusantium eligendi omnis. Quas vitae cupiditate soluta dolorum, odit
+          corporis possimus.
         </p>
       </div>
-      <div class="card card-custom">
-        <div class="sec">
+      <div
+        class="card card-custom"
+        style="
+          background-color: #fff;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          width: 300px;
+          padding: 20px;
+          transition: transform 0.3s;
+        "
+      >
+        <div
+          class="sec"
+          style="display: flex; align-items: center; margin-bottom: 15px"
+        >
           <div>
-            <img class="card-img-top" src="/assets/Steven.png" alt="" />
+            <img
+              class="card-img-top"
+              src="assets/Steven.png"
+              alt="Steven"
+              style="
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+                margin-right: 15px;
+              "
+            />
           </div>
           <div>
-            <h3><label for="name">Steven</label></h3>
-            <h5><label for="Member">Gold Member</label></h5>
+            <h3 style="font-size: 1.2em; color: #333">
+              <label for="name">Steven</label>
+            </h3>
+            <h5 style="font-size: 0.9em; color: #777">
+              <label for="Member">Gold Member</label>
+            </h5>
           </div>
         </div>
-        <p>
+        <p style="color: #555; line-height: 1.5">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis
           mollitia quod at quasi ab ratione, facere impedit sed nisi,
-          accusantium eligendi omnis. Quas vitae cupiditate soluta dolorum,
-          odit corporis possimus.
+          accusantium eligendi omnis. Quas vitae cupiditate soluta dolorum, odit
+          corporis possimus.
         </p>
       </div>
-      <div class="card card-custom">
-        <div class="sec">
+
+      <div
+        class="card card-custom"
+        style="
+          background-color: #fff;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          width: 300px;
+          padding: 20px;
+          transition: transform 0.3s;
+        "
+      >
+        <div
+          class="sec"
+          style="display: flex; align-items: center; margin-bottom: 15px"
+        >
           <div>
-            <img class="card-img-top" src="/assets/Steven.png" alt="" />
+            <img
+              class="card-img-top"
+              src="assets/Steven.png"
+              alt="Steven"
+              style="
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+                margin-right: 15px;
+              "
+            />
           </div>
           <div>
-            <h3><label for="name">Steven</label></h3>
-            <h5><label for="Member">Gold Member</label></h5>
+            <h3 style="font-size: 1.2em; color: #333">
+              <label for="name">Steven</label>
+            </h3>
+            <h5 style="font-size: 0.9em; color: #777">
+              <label for="Member">Gold Member</label>
+            </h5>
           </div>
         </div>
-        <p>
+        <p style="color: #555; line-height: 1.5">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis
           mollitia quod at quasi ab ratione, facere impedit sed nisi,
-          accusantium eligendi omnis. Quas vitae cupiditate soluta dolorum,
-          odit corporis possimus.
+          accusantium eligendi omnis. Quas vitae cupiditate soluta dolorum, odit
+          corporis possimus.
         </p>
       </div>
-      <div class="card card-custom">
-        <div class="sec">
+      <div
+        class="card card-custom"
+        style="
+          background-color: #fff;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          width: 300px;
+          padding: 20px;
+          transition: transform 0.3s;
+        "
+      >
+        <div
+          class="sec"
+          style="display: flex; align-items: center; margin-bottom: 15px"
+        >
           <div>
-            <img class="card-img-top" src="/assets/Steven.png" alt="" />
+            <img
+              class="card-img-top"
+              src="assets/Steven.png"
+              alt="Steven"
+              style="
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+                margin-right: 15px;
+              "
+            />
           </div>
           <div>
-            <h3><label for="name">Steven</label></h3>
-            <h5><label for="Member">Gold Member</label></h5>
+            <h3 style="font-size: 1.2em; color: #333">
+              <label for="name">Steven</label>
+            </h3>
+            <h5 style="font-size: 0.9em; color: #777">
+              <label for="Member">Gold Member</label>
+            </h5>
           </div>
         </div>
-        <p>
+        <p style="color: #555; line-height: 1.5">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis
           mollitia quod at quasi ab ratione, facere impedit sed nisi,
-          accusantium eligendi omnis. Quas vitae cupiditate soluta dolorum,
-          odit corporis possimus.
+          accusantium eligendi omnis. Quas vitae cupiditate soluta dolorum, odit
+          corporis possimus.
         </p>
       </div>
     </nav>
     <!-- end Review -->
 
     <!-- start footer -->
-    <nav class="footer">
-      <section class="section-container">
-        <section class="content-wrapper">
-            <div class="image-group">
-                <img loading="lazy" src="/assets/suzuki.png" class="image" alt="Image 1 description" />
-                <img loading="lazy" src="/assets/toyota-logo.png" class="image-2" alt="Image 2 description" />
-                <img loading="lazy" src="/assets/nissan-logo.png" class="image-3" alt="Image 3 description" />
-                <img loading="lazy" src="/assets/mitsubisi-logo.png" class="image-4" alt="Image 4 description" />
-                <img loading="lazy" src="/assets/daihatsu-logo.png" class="image-5" alt="Image 5 description" />
-            </div>
-            <section class="address-container">
-                <img loading="lazy" src="/assets/logo-car.png" class="decorative-image" alt="" />
-                <div class="contact-info-wrapper">
-                    <!-- <div class="contact-info">
-                        <img loading="lazy" src="/assets/location.png" class="contact-icon" alt="Contact icon 1" />
-                        <img loading="lazy" src="/assets/phone-icon.png" class="contact-icon" alt="Contact icon 2" />
-                        <img loading="lazy" src="/assets/mail-icon.png" class="contact-icon" alt="Contact icon 3" />
-                    </div> -->
-                    <address class="contact-details">
-                        contact info<br /><br />
-                        <img loading="lazy" src="/assets/location.png" class="contact-icon" alt="Contact icon 1" /> Jl.Trosobo Utama Blok D/14<br /><br />
-                        <img loading="lazy" src="/assets/phone-icon.png" class="contact-icon" alt="Contact icon 2" /> 08969701669<br /><br />
-                        <img loading="lazy" src="/assets/mail-icon.png" class="contact-icon" alt="Contact icon 3" /> rusdany33@gmail.com
-                    </address>
-                </div>
-            </section>
-            <p class="description">
-                Dafasan Rentcar Jasa Layanan yang mementingkan kenyamanan customer, keamanan dan kepuasan. Terimakasih sudah mempercayakan layanan kami dengan sepenuh hati kami akan memebrikan pelayanan terbaik kami
+    <footer class="footer" style="padding: 40px 0">
+      <div class="container">
+        <div class="row">
+          <!-- Footer Logo -->
+          <div class="col-md-4 mb-4 text-center">
+            <img
+              src="assets/logo-car.png"
+              alt="Company Logo"
+              style="max-width: 250px; margin-bottom: 20px"
+            />
+            <p style="font-size: 1.1em; line-height: 1.6">
+              Dafasan Rentcar Jasa Layanan yang mementingkan kenyamanan
+              customer, keamanan dan kepuasan. Terimakasih sudah mempercayakan
+              layanan kami dengan sepenuh hati kami akan memebrikan pelayanan
+              terbaik kami.
             </p>
-        </section>
-    </section>
-    </nav>
+          </div>
+          <!-- Contact Info -->
+          <div class="col-md-4 mb-4 text-center">
+            <h5 class="text-uppercase mb-3">Contact Info</h5>
+            <address style="line-height: 1.6">
+              <img
+                src="assets/location.png"
+                class="contact-icon"
+                style="
+                  max-width: 20px;
+                  vertical-align: middle;
+                  margin-right: 10px;
+                "
+                alt="Location Icon"
+              />
+              Jl.Trosobo Utama Blok D/14 <br />
+              <img
+                src="assets/phone-icon.png"
+                class="contact-icon"
+                style="
+                  max-width: 20px;
+                  vertical-align: middle;
+                  margin-right: 10px;
+                "
+                alt="Phone Icon"
+              />
+              08969701669 <br />
+              <img
+                src="assets/mail-icon.png"
+                class="contact-icon"
+                style="
+                  max-width: 20px;
+                  vertical-align: middle;
+                  margin-right: 10px;
+                "
+                alt="Mail Icon"
+              />
+              rusdany33@gmail.com
+            </address>
+          </div>
+          <!-- Brands -->
+          <div class="col-md-4 mb-4 text-center">
+            <h5 class="text-uppercase mb-3">Our Partners</h5>
+            <div class="image-group d-flex justify-content-center">
+              <img
+                src="assets/suzuki.png"
+                class="image"
+                style="max-width: 100px; margin: 0 10px"
+                alt="Brand 1"
+              />
+              <img
+                src="assets/toyota-logo.png"
+                class="image-2"
+                style="max-width: 100px; margin: 0 10px"
+                alt="Brand 2"
+              />
+              <img
+                src="assets/nissan-logo.png"
+                class="image-3"
+                style="max-width: 100px; margin: 0 10px"
+                alt="Brand 3"
+              />
+              <img
+                src="assets/mitsubisi-logo.png"
+                class="image-4"
+                style="max-width: 100px; margin: 0 10px"
+                alt="Brand 4"
+              />
+              <img
+                src="assets/daihatsu-logo.png"
+                class="image-5"
+                style="max-width: 100px; margin: 0 10px"
+                alt="Brand 5"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
     <!-- end footer -->
 
     <!-- bootstrap CDN link -->
