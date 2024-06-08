@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  background: linear-gradient(161deg, #4bb6d6 40%, #275f70 100%);
+  height: 100vh;
+  padding: 0;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0%;
+}
+.form-sect {
+  width: 40%;
+  flex-shrink: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+/* @media (max-width: 991px) {
+  .form-section {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+} */
+.logo-container {
+  width: 100%;
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-container span b {
+  font-size: 30px;
+  color: #0051d2;
+  text-shadow: -1px -1px 0 #00040a, 1px -1px 0 #00040a, -1px 1px 0 #00040a,
+    1px 1px 0 #00040a;
+  font-family: Inter;
+}
+.logo-container span span {
+  font-size: 24px;
+  font-family: Inter;
+}
+.wrapper-form{
+    padding: 10px;
+}
+.forgot-password{
+    color: #000;
+    text-decoration: none;
+}
+.sign-up-section{
+    display: flex;
+}
+.sign-up-text{
+    color: #000;
+    margin-right: 7px;
+    
+}
+.wrapper-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0px 50px 0px;
+}
+.btn-custom {
+  width: 100px;
+  height: 35px;
+}
+.image-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  /* line-height: normal; */
+  width: 1332px;
+  height: 100vh;
+  /* margin-left: 20px; */
+  background-image: url("/assets/pajero-sign.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
