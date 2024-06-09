@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+**Rental Mobi Web Application**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+This repository contains the source code for a web application for renting cars. Users can browse available cars, make reservations, and manage their bookings through this platform.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+### Backend
+1. **Express**: Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+   ```
+   npm install express
+   ```
 
-### `npm start`
+2. **OracleDB**: OracleDB is the Oracle Database driver for Node.js.
+   ```
+   npm install oracledb
+   ```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. **JWT (JSON Web Tokens)**: JWT is used for authentication and authorization purposes.
+   ```
+   npm install jsonwebtoken
+   ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+4. **CORS (Cross-Origin Resource Sharing)**: CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
+   ```
+   npm install cors
+   ```
 
-### `npm test`
+5. **Nodemon**: Nodemon is a utility that will monitor for any changes in your source and automatically restart your server.
+   ```
+   npm install nodemon --save-dev
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend
+1. **React.js**: React is a JavaScript library for building user interfaces.
+   ```
+   npx create-react-app rental-mobi
+   ```
 
-### `npm run build`
+2. **JWT (JSON Web Tokens)**: Same as in backend, JWT is used for authentication and authorization purposes in the frontend as well.
+   ```
+   npm install jsonwebtoken
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **React Router DOM**: React Router is a standard library for routing in React applications.
+   ```
+   npm install react-router-dom
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **Axios**: Axios is a promise-based HTTP client for the browser and Node.js.
+   ```
+   npm install axios
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Backend Structure
+- **server.js**: Entry point for the backend server.
 
-### `npm run eject`
+## Frontend Structure
+- **src/**: Contains all the source code for the frontend.
+  - **components/**: Reusable React components.
+  - **pages/**: Different pages of the application.
+  - **services/**: API service functions for making HTTP requests.
+  - **assets/**: Images, fonts, etc.
+  - **App.js**: Main component where routing is defined.
+  - **index.js**: Entry point for the React application.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Running the Application
+1. **Backend**: Navigate to the backend directory and run the following command to start the server using Nodemon:
+   ```
+   npm run dev
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. **Frontend**: Navigate to the frontend directory and run the following command to start the React development server:
+   ```
+   npm start
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Usage
+1. **Register/Login**: Users can register or login to their accounts.
+2. **Browse Cars**: Users can browse available cars with details like model, price, etc.
+3. **Make Reservation**: Users can select a car and make a reservation by specifying pickup and drop-off dates.
+4. **Manage Bookings**: Users can view and manage their bookings, including canceling reservations if needed.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Developer Team
+- Hasbi Ash Shiddiqi (202210370311391)
+- Andika Salsabillah (202210370311406)
+- Rusdany Maestro (202210370311402)
+- Dharma Putra (202210370311365)
+- Abdul Salam (202210370311367)
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

@@ -3,7 +3,7 @@ import '../index.css';
 
 function Home() {
   return (
-    <nav className="home d-flex" id="home   ">
+    <nav className="home d-flex" id="home">
       <div className="container-1">
         <div className="container-article">
           <article><b>Fast and Easy Way to Rent Car</b></article>

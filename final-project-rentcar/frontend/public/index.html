@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../src/index.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -18,15 +13,156 @@
     <title>RentCar</title>
     <style>
       .navbar-custom {
-        background-color: #ffffff00;
+        background-color: transparent; /* Transparent background */
+      }
+
+      .navbar-brand span {
+        color: #ffffff; /* White color for the brand text */
+      }
+
+      .nav-link {
+        color: #010101; /* Black color for the nav links */
+        transition: color 0.3s ease;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: #f8f9fa; /* Light grey color on hover and active */
       }
 
       .btn-custom {
-        background-color: #ffffff00;
+        background-color: #ffffff; /* White background for Sign In button */
       }
-      .card-custom {
-        width: 400px;
-        height: 600px;
+
+      .btn-custom:hover {
+        background-color: #d7d7d7; /* Light grey background on hover */
+        color: #004080; /* Dark blue text color for Sign In button */
+      }
+
+      .btn-primary {
+        background-color: #004080; /* Dark blue background for Sign Up button */
+        border-color: #004080; /* Dark blue border for Sign Up button */
+      }
+
+      .btn-primary:hover {
+        background-color: #003366; /* Darker blue background on hover */
+        border-color: #003366; /* Darker blue border on hover */
+      }
+
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%288, 8, 8, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+      }
+
+      .home,
+      .hiw,
+      .top-rate,
+      .review,
+      .footer {
+        padding: 0;
+        max-width: 2000px;
+      }
+
+      .home {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container-1 {
+        flex: 1;
+        padding: 20px;
+        max-width: 3000px;
+      }
+
+      .container-2 {
+        flex: 1;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .container-2 img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .hiw .container-hiw {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .hiw .container-hiw > div {
+        flex: 1;
+        text-align: center;
+        min-width: 150px;
+      }
+
+      .top-rate .container-top-rate {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 20px;
+      }
+
+      .top-rate .card {
+        flex: 1 1 calc(33.333% - 40px);
+
+        max-width: 300px;
+      }
+
+      .review {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .review .card {
+        flex: 1 1 calc(33.333% - 40px);
+        max-width: 300px;
+      }
+
+      .footer .section-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer .image-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .footer .address-container {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      @media (max-width: 768px) {
+        .home {
+          flex-direction: column;
+        }
+
+        .hiw .container-hiw {
+          flex-direction: column;
+        }
+
+        .top-rate .card,
+        .review .card {
+          flex: 1 1 100%;
+        }
+
+        .footer .section-container {
+          flex-direction: column;
+        }
       }
     </style>
   </head>
