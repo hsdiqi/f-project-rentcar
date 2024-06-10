@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import { useNavigate } from "react-router-dom";
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 
 function Navbar() {
   const [navbarVisible, setNavbarVisible] = useState(true);
@@ -27,27 +27,36 @@ function Navbar() {
   useEffect(() => {
     // Periksa apakah ada token yang tersimpan di local storage
     const accessToken = localStorage.getItem("accessToken");
+    let localAccessToken = localStorage.getItem("access token");
+
+    if (accessToken === null) {
+      setIsLoggedIn(false);
+    } else {
+      if (accessToken === localAccessToken) {
+        setIsLoggedIn(true);
+      }
+    }
 
     // Jika ada token, lakukan verifikasi token
-    if (accessToken) {
-      // Lakukan verifikasi token di sini, misalnya menggunakan fungsi jwt.verify
-      // Contoh:
-      jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-        if (err) {
-          // Jika token tidak valid, pengguna tidak login
-          setIsLoggedIn(false);
-        } else {
-          // Jika token valid, pengguna sudah login
-          setIsLoggedIn(true);
-        }
-      });
+    // if (accessToken) {
+    //   // Lakukan verifikasi token di sini, misalnya menggunakan fungsi jwt.verify
+    //   // Contoh:
+    //   jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+    //     if (err) {
+    //       // Jika token tidak valid, pengguna tidak login
+    //       setIsLoggedIn(false);
+    //     } else {
+    //       // Jika token valid, pengguna sudah login
+    //       setIsLoggedIn(true);
+    //     }
+    //   });
 
-      // Untuk tujuan demonstrasi, asumsikan token selalu valid
-      setIsLoggedIn(true);
-    } else {
-      // Jika tidak ada token, pengguna tidak login
-      setIsLoggedIn(false);
-    }
+    //   // Untuk tujuan demonstrasi, asumsikan token selalu valid
+    //   setIsLoggedIn(true);
+    // } else {
+    //   // Jika tidak ada token, pengguna tidak login
+    //   setIsLoggedIn(false);
+    // }
   }, []);
 
   const handleSignOut = () => {
@@ -58,7 +67,7 @@ function Navbar() {
     // Redirect ke halaman sign in
     navigate("/signIn");
   };
-  
+
   return (
     <nav
       className={`navbar navbar-expand-lg navbar-light navbar-custom fixed-top el-navbar ${
@@ -84,7 +93,13 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link" to="Home" smooth={true} duration={500} onClick={() => navigate('/')}>
+              <Link
+                className="nav-link"
+                to="Home"
+                smooth={true}
+                duration={500}
+                onClick={() => navigate("/")}
+              >
                 Home
               </Link>
             </li>
@@ -112,15 +127,27 @@ function Navbar() {
           <div className="d-grid gap-2 d-md-block ms-auto gripper-custom">
             {/* Tampilkan tombol sign out jika pengguna sudah login */}
             {isLoggedIn ? (
-              <button className="btn btn-custom" type="button" onClick={handleSignOut}>
+              <button
+                className="btn btn-custom"
+                type="button"
+                onClick={handleSignOut}
+              >
                 Sign Out
               </button>
             ) : (
               <>
-                <button className="btn btn-custom" type="button" onClick={()=> navigate('/signIn')}>
+                <button
+                  className="btn btn-custom"
+                  type="button"
+                  onClick={() => navigate("/signIn")}
+                >
                   Sign In
                 </button>
-                <button className="btn btn-primary" type="button" onClick={()=> navigate('/signUp')}>
+                <button
+                  className="btn btn-primary"
+                  type="button"
+                  onClick={() => navigate("/signUp")}
+                >
                   Sign Up
                 </button>
               </>
