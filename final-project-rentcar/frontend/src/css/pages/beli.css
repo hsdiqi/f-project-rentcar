@@ -1,0 +1,227 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    background: linear-gradient(180deg, #4bb6d6 40%, #ebf2fa 100%);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #000;
+    border: 1px solid #000;
+    background-color: #4bb6d6;
+    width: 100%;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    padding: 20px 15px;
+    font: 600 30px Inter, sans-serif;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .header-title {
+    font-weight: 900;
+    font-size: 50px;
+    color: rgba(22, 108, 245, 1);
+  }
+
+  .header-subtitle {
+    font-weight: 900;
+    color: #000;
+    font-size: 20px;
+    
+    
+  }
+
+  @media (max-width: 991px) {
+    .header {
+      max-width: 100%;
+      padding-right: 20px;
+    }
+  }
+
+  .content {
+    border-radius: 50px 50px 0 0;
+    background-color: #a7d9eb;
+    align-self: center;
+    z-index: 10;
+    display: flex;
+    width: 900px;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 29px 63px;
+  }
+
+  @media (max-width: 991px) {
+    .content {
+      padding: 0 20px;
+    }
+  }
+
+  .image-wrapper {
+    background-color: rgba(255, 255, 255, 0.6);
+    align-self: center;
+    display: flex;
+    width: 314px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    padding: 0 1px;
+  }
+
+  .image {
+    aspect-ratio: 1.96;
+    object-fit: auto;
+    object-position: center;
+    width: 100%;
+  }
+
+  .picture-list {
+    display: flex;
+    margin-top: 21px;
+    gap: 12px;
+    font-size: 20px;
+    color: #000;
+    font-weight: 500;
+  }
+
+  @media (max-width: 991px) {
+    .picture-list {
+      flex-wrap: wrap;
+      padding-right: 20px;
+    }
+  }
+
+  .picture-item {
+    font-family: Inter, sans-serif;
+    background-color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    width: 100px;
+    justify-content: center;
+    height: 100px;
+    padding: 0 6px;
+  }
+
+  .specs-container {
+    align-self: flex-start;
+    display: flex;
+    gap: 18px;
+    font-size: 20px;
+    color: #000;
+    font-weight: 500;
+    justify-content: space-between;
+    margin: 19px 0 0 88px;
+  }
+
+  @media (max-width: 991px) {
+    .specs-container {
+      margin-left: 10px;
+    }
+  }
+
+  .specs-labels {
+    font-family: Inter, sans-serif;
+  }
+
+  .specs-values {
+    font-family: Inter, sans-serif;
+  }
+
+  .specs-symbols {
+    font-family: Inter, sans-serif;
+  }
+
+  .form-title {
+    color: #000;
+    text-decoration: underline;
+    margin-top: 24px;
+    font: 500 20px Inter, sans-serif;
+  }
+
+  @media (max-width: 991px) {
+    .form-title {
+      max-width: 100%;
+    }
+  }
+
+  .date-picker {
+    border-radius: 10px;
+    background-color: #fff;
+    align-self: flex-start;
+    width: 440px;
+    max-width: 100%;
+    height: 50px;
+    /* margin-bottom: 4px; */
+  }
+
+  .return-title {
+    color: #000;
+    text-decoration: underline;
+    margin-top: 44px;
+    font: 500 20px Inter, sans-serif;
+  }
+
+  @media (max-width: 991px) {
+    .return-title {
+      max-width: 100%;
+      margin-top: 40px;
+    }
+  }
+
+  .booking-container {
+    margin-left: 88px;
+    display: flex;
+    width: 686px;
+    max-width: 100%;
+    align-items: flex-start;
+    gap: 20px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 700;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 991px) {
+    .booking-container {
+      flex-wrap: wrap;
+    }
+  }
+
+  .return-date {
+    border-radius: 10px;
+    background-color: #fff;
+    align-self: flex-start;
+    width: 440px;
+    max-width: 100%;
+    height: 50px;
+  }
+
+  .booking-button {
+    font-family: Inter, sans-serif;
+    border-radius: 15px;
+    background-color: #166cf5;
+    align-self: flex-end;
+    margin-top: 27px;
+    justify-content: center;
+    padding: 8px 23px;
+  }
+
+  @media (max-width: 991px) {
+    .booking-button {
+      padding: 0 20px;
+    }
+  }
+  .form-container{
+    display: flex;
+    flex-direction: column  ;
+    margin-left: 185px;
+  }

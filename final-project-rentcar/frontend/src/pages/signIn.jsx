@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./signIn.css";
+import "../css/pages/signIn.css";
 import { Link, useNavigate } from "react-router-dom";
 // import MainPage from "./../main";
 
@@ -8,15 +8,22 @@ function SignIn() {
   // State untuk menyimpan nilai email dan password
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // const [userId, setUserId] = useState("");
   const navigate = useNavigate();
 
   // Handler untuk memproses login
   const handleSignIn = () => {
+    const admin = "admin";
+    if(email === admin && password === admin){
+      navigate("/loginAdmin")
+    }
     axios
       .post("http://localhost:3001/api/login", { email, password })
       .then((response) => {
-        const { accessToken } = response.data;
+        const { accessToken, userId } = response.data;
         localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("userId", userId);
+
         navigate("/")
         // bth();
       })
@@ -93,9 +100,9 @@ function SignIn() {
             Sign In
           </button>
         </div>
-        <Link to={"/forgotPass"} className="forgot-password">
+        {/* <Link to={"/forgotPass"} className="forgot-password">
           Forgot Password
-        </Link>
+        </Link> */}
         <div className="sign-up-section">
           <div className="sign-up-text">Don't Have Account?</div>
           <Link onClick={handleSignUp}>Sign Up</Link>

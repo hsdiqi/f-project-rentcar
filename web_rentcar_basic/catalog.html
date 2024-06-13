@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>catalog</title>
+
+    <link rel="stylesheet" href="catalog.css">
+</head>
+
+<body>
+    <main class="container">
+        <header class="header">
+            <h1 class="logo-title">Dafasan Rentcar</h1>
+            <button class="logout">Logout</button>
+        </header>
+        <section class="main-content">
+            <div class="content-wrapper">
+                <aside class="filter-section">
+                    <section class="filter-wrapper">
+                        <h2 class="filter-title">Rental Mobil</h2>
+                        <form>
+                            <label for="car-category" class="visually-hidden">Kategori Mobil</label>
+                            <select id="car-category" class="filter-item">
+                                <option value="SUV">SUV's</option>
+                                <option value="Sedans">Sedans</option>
+                            </select>
+                            <label for="order-date" class="visually-hidden">Tanggal Ambil</label>
+                            <input type="date" id="order-date" class="input-box filter-item"
+                                placeholder="Tanggal Pesan">
+                            <label for="return-date" class="visually-hidden">Tanggal Kembali</label>
+                            <input type="date" id="return-date" class="input-box filter-item"
+                                placeholder="Tanggal Kembali">
+                            <button class="view-btn" type="submit">Lihat Mobil</button>
+                        </form>
+                    </section>
+                </aside>
+                <section class="car-section">
+                    <section class="car-filter">
+                        <div class="sort-options" tabindex="0">Sort by:
+                            <span style="color: rgba(57, 195, 35, 1)">
+                                <option value="price">price</option>
+                                <option value="ready">ready</option>
+                            </span>
+                        </div>
+                        <div class="car-list-header"></div>
+                        <div class="car-list">
+                            <article class="car-details">
+                                <figure>
+                                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dd31a90ba8b0111857a27f534e284abeb2fcf73d7b3181cd2b852984011310e2?apiKey=2b895edd60bb496c8e447f22b11ea71b&"
+                                        alt="BMW M6" class="car-image" />
+                                    <figcaption class="car-info">
+                                        <h3 class="car-title">BMW M6</h3>
+                                        <p class="car-features">Air conditioner<br />Automatic<br />4 Passenger</p>
+                                    </figcaption>
+                                </figure>
+                                <div class="rent-details">
+                                    <p class="rent-price">1Jt/day</p>
+                                    <button class="book-now" tabindex="0">Book Now</button>
+                                </div>
+                            </article>
+                            <article class="car-details">
+                                <figure>
+                                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dd31a90ba8b0111857a27f534e284abeb2fcf73d7b3181cd2b852984011310e2?apiKey=2b895edd60bb496c8e447f22b11ea71b&"
+                                        alt="BMW M6" class="car-image" />
+                                    <figcaption class="car-info">
+                                        <h3 class="car-title">BMW M6</h3>
+                                        <p class="car-features">Air conditioner<br />Automatic<br />4 Passenger</p>
+                                    </figcaption>
+                                </figure>
+                                <div class="rent-details">
+                                    <p class="rent-price">1Jt/day</p>
+                                    <button class="book-now" tabindex="0">Book Now</button>
+                                </div>
+                            </article>
+                            <article class="car-details">
+                                <figure>
+                                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dd31a90ba8b0111857a27f534e284abeb2fcf73d7b3181cd2b852984011310e2?apiKey=2b895edd60bb496c8e447f22b11ea71b&"
+                                        alt="BMW M6" class="car-image" />
+                                    <figcaption class="car-info">
+                                        <h3 class="car-title">BMW M6</h3>
+                                        <p class="car-features">Air conditioner<br />Automatic<br />4 Passenger</p>
+                                    </figcaption>
+                                </figure>
+                                <div class="rent-details">
+                                    <p class="rent-price">1Jt/day</p>
+                                    <button class="book-now" tabindex="0">Book Now</button>
+                                </div>
+                            </article>
+                            <article class="car-details">
+                                <figure>
+                                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dd31a90ba8b0111857a27f534e284abeb2fcf73d7b3181cd2b852984011310e2?apiKey=2b895edd60bb496c8e447f22b11ea71b&"
+                                        alt="BMW M6" class="car-image" />
+                                    <figcaption class="car-info">
+                                        <h3 class="car-title">BMW M6</h3>
+                                        <p class="car-features">Air conditioner<br />Automatic<br />4 Passenger</p>
+                                    </figcaption>
+                                </figure>
+                                <div class="rent-details">
+                                    <p class="rent-price">1Jt/day</p>
+                                    <button class="book-now" tabindex="0">Book Now</button>
+                                </div>
+                            </article>
+                            <article class="car-details">
+                                <figure>
+                                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dd31a90ba8b0111857a27f534e284abeb2fcf73d7b3181cd2b852984011310e2?apiKey=2b895edd60bb496c8e447f22b11ea71b&"
+                                        alt="BMW M6" class="car-image" />
+                                    <figcaption class="car-info">
+                                        <h3 class="car-title">BMW M6</h3>
+                                        <p class="car-features">Air conditioner<br />Automatic<br />4 Passenger</p>
+                                    </figcaption>
+                                </figure>
+                                <div class="rent-details">
+                                    <p class="rent-price">1Jt/day</p>
+                                    <button class="book-now" tabindex="0">Book Now</button>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

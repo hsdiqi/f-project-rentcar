@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../index.css';
+import '../css/pages/index.css';
 
 function MostBook() {
   const [mostBook, setMostBook] = useState([]);
 
   useEffect(() => {
     // Mengambil data dari database saat komponen dimuat
-    axios.get('http://localhost:3001/api/cars')
+    axios.get('http://localhost:3001/api/mostbook')
       .then(response => {
         // Pastikan respons memiliki properti "kendaraan" yang berupa array
         if (Array.isArray(response.data.cars)) {
+          console.log("response: ",response.data)
           setMostBook(response.data.cars);
         } else {
           console.error('Data fetched does not contain "kendaraan" array:', response.data);

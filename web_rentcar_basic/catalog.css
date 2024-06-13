@@ -1,0 +1,250 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+  height: 1080;
+}
+.container {
+  background-color: #d1d1d1;
+  display: flex;
+  padding-bottom: 47px;
+  flex-direction: column;
+}
+.header {
+  background-color: #373737;
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  color: #ebf2fa;
+  font-weight: 900;
+  text-align: center;
+  padding: 34px 27px;
+}
+@media (max-width: 991px) {
+  .header {
+    max-width: 1440px;
+    flex-wrap: wrap;
+  }
+}
+.logo-title {
+  flex-grow: 1;
+  font: 20px Inter, sans-serif;
+}
+.logout {
+  font: 16px Inter, sans-serif;
+}
+.main-content {
+  align-self: center;
+  z-index: 10;
+  margin-top: -21px;
+  width: 100%;
+  max-width: 1352px;
+}
+@media (max-width: 991px) {
+  .main-content {
+    max-width: 100%;
+  }
+}
+.content-wrapper {
+  gap: 20px;
+  display: flex;
+}
+@media (max-width: 991px) {
+  .content-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0px;
+  }
+}
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  /* width: 29%; */
+  height: auto;
+}
+@media (max-width: 991px) {
+  .filter-section {
+    width: 100%;
+  }
+}
+.filter-wrapper {
+  border-radius: 10px;
+  background-color: #ebf2fa;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  color: #000;
+  font-weight: 900;
+  text-align: center;
+  width: 373px;
+  height: 904px;
+  padding: 24px 30px;
+}
+@media (max-width: 991px) {
+  .filter-wrapper {
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+}
+.filter-title {
+  font: 20px Inter, sans-serif;
+  margin-bottom: 100px;
+}
+.filter-wrapper form {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  /* width: 50%; */
+}
+.filter-wrapper form label {
+  margin: 0;
+}
+.filter-item {
+  font-family: Inter, sans-serif;
+  z-index: 10;
+  margin-top: 50px;
+}
+@media (max-width: 991px) {
+  .filter-item {
+    margin-top: 40px;
+  }
+}
+.input-box {
+  border: 1px solid rgba(0, 0, 0, 1);
+  background-color: rgba(248, 248, 248, 0);
+  height: 37px;
+}
+.view-btn {
+  border-radius: 8px;
+  background-color: #373737;
+  align-self: center;
+  margin-top: 92px;
+  color: #ebf2fa;
+  justify-content: center;
+  padding: 16px 40px;
+  font: 16px Inter, sans-serif;
+}
+@media (max-width: 991px) {
+  .view-btn {
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+}
+.car-section {
+  display: flex;
+  flex-direction: column;
+  width: 71%;
+  margin-left: 20px;
+}
+@media (max-width: 991px) {
+  .car-section {
+    width: 100%;
+  }
+}
+.car-filter {
+  background-color: #ebf2fa;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  width: 100%;
+  padding: 23px 0 5px;
+  margin-top: 59px;
+}
+@media (max-width: 991px) {
+  .car-filter {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+}
+.sort-options {
+  color: #39c323;
+  text-align: center;
+  align-self: end;
+  margin-right: 40px;
+  font: 900 12px Inter, sans-serif;
+}
+@media (max-width: 991px) {
+  .sort-options {
+    margin-right: 10px;
+  }
+}
+.car-list-header {
+  background-color: #373737;
+  height: 50px;
+  margin-top: 6px;
+}
+@media (max-width: 991px) {
+  .car-list-header {
+    max-width: 100%;
+  }
+}
+.car-list {
+  background-color: #f6f6f6;
+  display: flex;
+  flex-direction: column;
+  width: 845px;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 9px 28px;
+}
+@media (max-width: 991px) {
+  .car-list {
+    max-width: 100%;
+    flex-wrap: wrap;
+    padding-right: 20px;
+  }
+}
+.car-details {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+.car-image {
+  aspect-ratio: 1.82;
+  object-fit: cover;
+  width: 100%;
+  drop-shadow: 0px 10px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.car-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 11px;
+}
+.car-title {
+  text-align: center;
+  font-family: Inter, sans-serif;
+  font-weight: 900;
+}
+.car-features {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  margin-top: 30px;
+}
+.rent-details {
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
+}
+.rent-price {
+  color: #000;
+  font-family: Inter, sans-serif;
+  align-self: end;
+}
+.book-now {
+  font-family: Inter, sans-serif;
+  border-radius: 5px;
+  background-color: #373737;
+  color: #ebf2fa;
+  justify-content: center;
+  padding: 10px 13px;
+  margin-top: 63px;
+}
+@media (max-width: 991px) {
+  .book-now {
+    margin-top: 40px;
+  }
+}

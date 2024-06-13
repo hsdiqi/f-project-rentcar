@@ -1,5 +1,5 @@
 import React from "react";
-import './forgotPass.css';
+import '../css/pages/forgotPass.css';
 
 function ForgotPass() {
     return(
