@@ -11,6 +11,7 @@ function BookingPage() {
   const [sumPrice, setSumPrice] = useState(0);
   const [bookDate, setBookDate] = useState("");
   const [harga, setHarga] = useState(0);
+  
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const carId = searchParams.get("id");

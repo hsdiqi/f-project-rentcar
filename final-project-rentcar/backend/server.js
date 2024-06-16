@@ -5,8 +5,18 @@ const app = express();
 const port = 3001;
 const jwt = require("jsonwebtoken"); //npm install jsonwebtoken
 
-const loginAdmin = require("./api/loginAdmin")
 const bodyParser = require("body-parser");
+
+// pemangglan API
+const loginAdmin = require("./api/loginAdmin")
+const listCar = require("./api/dashboardAdmin/dashboardAdmin");
+const mobil = require("./api/dashboardAdmin/mobil");
+// const login = require("./api/login")
+// const mostbook = require("./api/mostBook")
+// const reviews = require("./api/reviews")
+// const signUp = require("./api/signUp")
+// const katalog = require("./api/katalog")
+// const booking = require("./api/booking")
 
 app.use(cors({
   origin: 'http://localhost:3000', // Sesuaikan dengan URL frontend Anda
@@ -44,6 +54,7 @@ function authenticateToken(req, res, next) {
 }
 
 // API untuk most book
+// app.use("/api", mostbook)
 app.get("/api/mostbook", async (req, res) => {
   let connection;
   try {
@@ -79,6 +90,7 @@ app.get("/api/mostbook", async (req, res) => {
 });
 
 // API untuk reviews
+// app.use("/api", reviews )
 app.get("/api/reviews", async (req, res) => {
   let connection;
 
@@ -114,6 +126,7 @@ app.get("/api/reviews", async (req, res) => {
 });
 
 // API untuk verif login
+// app.use("/api", login)
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
   console.log("Login endpoint hit");
@@ -168,6 +181,7 @@ app.post("/api/login", async (req, res) => {
 });
 
 // API untuk Sign Up
+// app.use("/api", signUp)
 app.post("/api/signUp", async (req, res) => {
   let connection;
 
@@ -275,6 +289,7 @@ app.post("/api/signUp", async (req, res) => {
 });
 
 // api untuk katalog
+// app.use("/api", katalog)
 app.post("/api/carlist", async (req, res) => {
   let connection;
 
@@ -323,6 +338,7 @@ app.post("/api/carlist", async (req, res) => {
 });
 
 // api untuk mendapatkan data kendaraan
+// app.use("/api", booking)
 app.post("/api/prebookcar", async (req, res) => {
   let connection;
   try {
@@ -432,8 +448,14 @@ app.post("/api/booking", authenticateToken, async (req, res) => {
   }
 });
 
-// memanggil API
+// memanggil API login untuk Admin
 app.use("/api" ,loginAdmin)
+
+// memanggil api untuk dashboard admin
+app.use("/api", listCar)
+
+// memanggil api mobil(list mobil di dashboardAdmin/mobil)
+app.use("/api", mobil)
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

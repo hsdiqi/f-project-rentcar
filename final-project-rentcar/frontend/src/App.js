@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import { useEffect } from "react";
 import MainPage from "./pages/main";
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
-// import Navbar from "./components/navbar";
 import Catalog from "./pages/catalog";
 import BookingPage from "./pages/booking";
 import LoginAdmin from "./pages/admin/loginAdmin";
 import DashboardAdmin from "./pages/admin/dashboard";
+import Mobil from "./pages/admin/mobil";
+
 
 function App() {
   // useEffect(() => {
@@ -29,9 +29,6 @@ function App() {
   return (
     <Router>
       <div>
-        {/* <Navbar /> */}
-        {/* <MainPage/> */}
-        {/* <Route path="/" element={<MainPage />} /> */}
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/main" element={<MainPage />} />
@@ -41,6 +38,7 @@ function App() {
           <Route path="/bookingPage" element={<BookingPage />} />
           <Route path="/loginadmin" element={<LoginAdmin />} />
           <Route path="/dashboardAdmin" element={<DashboardAdmin />} />
+          <Route path="/mobil" element = {<Mobil/>}/>
         </Routes>
       </div>
     </Router>
