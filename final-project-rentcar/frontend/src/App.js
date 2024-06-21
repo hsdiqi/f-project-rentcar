@@ -8,6 +8,7 @@ import BookingPage from "./pages/booking";
 import LoginAdmin from "./pages/admin/loginAdmin";
 import DashboardAdmin from "./pages/admin/dashboard";
 import Mobil from "./pages/admin/mobil";
+import Pesanan from "./pages/admin/pesanan";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path="/loginadmin" element={<LoginAdmin />} />
           <Route path="/dashboardAdmin" element={<DashboardAdmin />} />
           <Route path="/mobil" element = {<Mobil/>}/>
+          <Route path="/pesanan" element={<Pesanan/>}/>
         </Routes>
       </div>
     </Router>

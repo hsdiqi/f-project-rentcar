@@ -29,7 +29,7 @@ const NavbarAdmin = () => {
                     </li>
 
                     <li className="nav-item ">
-                        <a className="nav-link " href="#/pesanan" id="masterPemesanDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a className="nav-link " href="/pesanan" id="masterPemesanDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i className="fas fa-fw fa-user"></i>
                             <span className="ml-1">Master Pemesan</span>
                         </a>

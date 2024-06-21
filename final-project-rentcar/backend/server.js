@@ -7,10 +7,11 @@ const jwt = require("jsonwebtoken"); //npm install jsonwebtoken
 
 const bodyParser = require("body-parser");
 
-// pemangglan API
+// pemanggilan API
 const loginAdmin = require("./api/loginAdmin")
 const listCar = require("./api/dashboardAdmin/dashboardAdmin");
 const mobil = require("./api/dashboardAdmin/mobil");
+const pesanan = require("./api/dashboardAdmin/pesanan")
 // const login = require("./api/login")
 // const mostbook = require("./api/mostBook")
 // const reviews = require("./api/reviews")
@@ -456,6 +457,9 @@ app.use("/api", listCar)
 
 // memanggil api mobil(list mobil di dashboardAdmin/mobil)
 app.use("/api", mobil)
+
+// memanggil API pesanan
+app.use("/api", pesanan)
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
