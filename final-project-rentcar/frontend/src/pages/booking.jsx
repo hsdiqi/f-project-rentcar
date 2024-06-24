@@ -11,7 +11,7 @@ function BookingPage() {
   const [sumPrice, setSumPrice] = useState(0);
   const [bookDate, setBookDate] = useState("");
   const [harga, setHarga] = useState(0);
-  
+
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const carId = searchParams.get("id");
@@ -57,16 +57,14 @@ function BookingPage() {
   }, [pickDate, returnDate, harga]);
 
   const handleBooking = () => {
-    if (!userId || !accessToken) {
-      alert("Anda belum mendaftar");
-      return;
-    }
+    console.log(accessToken, userId);
 
     axios
       .post(
         "http://localhost:3001/api/booking",
         {
           // withCredentials: true,
+          userId,
           carId,
           pickDate,
           returnDate,
@@ -75,7 +73,7 @@ function BookingPage() {
         },
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${accessToken}`, // Ensure this is correctly formatted
           },
         }
       )
@@ -92,6 +90,10 @@ function BookingPage() {
             case 404:
               alert("Tanggal harus diisi");
               break;
+            case 403:
+              alert("akses ditolak");
+              console.log(error);
+              break;
             default:
               alert("Terjadi kesalahan, silahkan coba lagi");
           }
@@ -105,11 +107,11 @@ function BookingPage() {
   return (
     <div className="main-container">
       <header className="header">
-      <Link to="/main" style={{ textDecoration: 'none' }}>
-      <span className="header-title">
-        PANDAWA<span className="header-subtitle"> RentCar</span>
-      </span>
-    </Link>
+        <Link to="/main" style={{ textDecoration: "none" }}>
+            <span className="header-title">
+              PANDAWA<span className="header-subtitle"> RentCar</span>
+            </span>
+        </Link>
       </header>
       <section className="content">
         <figure className="image-wrapper">

@@ -1,14 +1,15 @@
 const express = require("express");
-const oracledb = require("../dbConfig");
+const oracledb = require("./../dbConfig");
 const jwt = require("jsonwebtoken");
-let { authenticateToken } = require("../jwtToken");
+let { authenticateToken } = require("./../jwtToken");
+require("dotenv").config();
 
 const router = express.Router();
 
 router.post("/prebookcar", async (req, res) => {
   let connection;
   try {
-    connection = await oracledb.getConnection(dbConfig);
+    connection = await oracledb.getConnection();
 
     const { carId } = req.body;
     // console.log(carId)
@@ -38,83 +39,60 @@ router.post("/prebookcar", async (req, res) => {
 router.post("/booking", authenticateToken, async (req, res) => {
   let connection;
   const bookStatus = "telah dipesan";
+  console.log("booking hit");
 
   try {
-    connection = await oracledb.getConnection(dbConfig);
+    connection = await oracledb.getConnection();
 
-    const { userId, carId, pickDate, returnDate, sumPrice, bookDate } =
-      req.body;
+    const { carId, pickDate, returnDate, sumPrice, bookDate } = req.body;
 
     if (!pickDate || !returnDate) {
       console.log("pick: ", pickDate, " return: ", returnDate);
-      return res.status(404).json({ message: "tanggal harus diisi" });
+      return res.status(400).json({ message: "Tanggal harus diisi" });
     }
 
-    console.log("id user dari request", userId);
-    let idUser = req.user.id_pelanggan;
+    // Mendekode token untuk mendapatkan id_pelanggan
+    const token = req.headers.authorization.split(" ")[1];
+    console.log("token dari header", token);
+    const idUser = req.user.id_pelanggan; // Mendapatkan id_pelanggan dari token
+
     console.log("id user dari token: ", idUser);
 
-    const seqResultBookingId = await connection.execute(
-      `SELECT id_pemesanan
-        FROM (
-          SELECT id_pemesanan
-          FROM pemesanan
-          ORDER BY id_pemesanan DESC
-        )
-        WHERE ROWNUM = 1`
-    );
-    const seqResultPaymentId = await connection.execute(
-      `SELECT id_pemesanan
-        FROM (
-          SELECT id_pemesanan
-          FROM pemesanan
-          ORDER BY id_pemesanan DESC
-        )
-        WHERE ROWNUM = 1`
-    );
-
-    const lastIdBooking = seqResultBookingId.rows[0].ID_PEMESANAN;
-    const lastIdPayment = seqResultBookingId.rows[0].ID_PEMBAYARAN;
-
-    let seqValueBooking;
-    let seqValuePayment;
-    if (lastIdBooking != null) {
-      seqValueBooking = lastIdBooking + 1;
-    } else {
-      seqValueBooking = 1;
-    }
-    if (lastIdPayment != null) {
-      seqValuePayment = lastIdPayment + 1;
-    } else {
-      seqValuePayment = 1;
-    }
-    console.log("SEQ value", seqValue);
-
-    let resultBooking = await connection.execute(
-      `INSERT INTO pemesanan(id_pemesanan, tanggal_pemesanan, tangga_mulai_sewa, tanggal_akhir_sewa, total, status_pemesanan, pelanggan_id_pelanggan, kendaraan_id_kendaraan)
-        VALUES(:bookId, TO_DATE(:bookDate, 'YYYY-MM-DD'), TO_DATE(:pickDate, 'YYYY-MM-DD'), TO_DATE(:returnDate, 'YYYY-MM-DD'), :sumPrice, :bookStatus, :userId, :carId)`,
+    let bookingID = "";
+    let result = await connection.execute(
+      `INSERT INTO pemesanan( tanggal_pemesanan, tangga_mulai_sewa, tanggal_akhir_sewa, total, status_pemesanan, pelanggan_id_pelanggan, kendaraan_id_kendaraan)
+      VALUES( TO_DATE(:bookDate, 'YYYY-MM-DD'), TO_DATE(:pickDate, 'YYYY-MM-DD'), TO_DATE(:returnDate, 'YYYY-MM-DD'), :sumPrice, :bookStatus, :idUser, :carId)
+      RETURNING id_pemesanan INTO :bookingID`,
       {
-        bookId: seqValueBooking,
         bookDate,
         pickDate,
         returnDate,
         sumPrice,
         bookStatus,
-        userId: req.user.id_pelanggan, // Menggunakan id_pelanggan dari token
+        idUser, // Menggunakan id_pelanggan dari token
         carId,
+        bookingID: { type: oracledb.STRING, dir: oracledb.BIND_OUT },
       },
       { autoCommit: true }
     );
-    let resultPayment = await connection.execute(
-      `INSERT INTO pembayaran(id_pembayaran, jumlah_pembayaran, PEMESANAN_ID_PEMESANAN)
-      VALUES(:paymentId, :sumPrice, :bookingId)`,
-      { paymentId: seqValuePayment, sumPrice, bookingId: seqValueBooking },
+
+    bookingID = result.outBinds.bookingID[0];
+    console.log("bookingid: ", bookingID);
+    const payment = await connection.execute(
+      `INSERT INTO pembayaran(jumlah_pembayaran, pemesanan_id_pemesanan)
+      VALUES(:sumPrice, :bookingID )`,
+      { sumPrice, bookingID },
       { autoCommit: true }
     );
 
-    res
-      .status(200)
-      .json({ message: "Booking berhasil", resultBooking, resultPayment });
+    const update = await connection.execute(
+      `UPDATE kendaraan SET status = 'Tidak Tersedia'
+      WHERE id_kendaraan = :carId`,
+      { carId },
+      { autoCommit: true }
+    );
+
+    res.status(200).json({ message: "Booking berhasil", result });
     console.log("booking sukses");
   } catch (err) {
     console.error("Error executing SQL:", err);
@@ -129,5 +107,7 @@ router.post("/booking", authenticateToken, async (req, res) => {
     }
   }
 });
+
+module.exports = router;
 
 module.exports = router;

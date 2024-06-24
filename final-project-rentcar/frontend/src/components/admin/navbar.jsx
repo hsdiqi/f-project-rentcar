@@ -20,7 +20,7 @@ const NavbarAdmin = () => {
                     <li className="nav-item ">
                         <a className="nav-link " href="/mobil" id="masterMobilDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i className="fas fa-fw fa-columns"></i>
-                            <span className="ml-1">Master Mobil</span>
+                            <span className="ml-1">Manajemen Mobil</span>
                         </a>
                         <div className="dropdown-menu" aria-labelledby="masterMobilDropdown">
                             <NavLink className="dropdown-item" to="/merk">Data Merk</NavLink>
@@ -31,7 +31,7 @@ const NavbarAdmin = () => {
                     <li className="nav-item ">
                         <a className="nav-link " href="/pesanan" id="masterPemesanDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i className="fas fa-fw fa-user"></i>
-                            <span className="ml-1">Master Pemesan</span>
+                            <span className="ml-1">Manajemen Pemesan</span>
                         </a>
                         <div className="dropdown-menu" aria-labelledby="masterPemesanDropdown">
                             <NavLink className="dropdown-item" to="/pemesan">Data Pemesan</NavLink>
@@ -40,7 +40,7 @@ const NavbarAdmin = () => {
                     </li>
 
                     <li className="nav-item">
-                        <a className="nav-link" href="/akunUser" id="masterPesananDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a className="nav-link" href="/manajemenAkun" id="masterPesananDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i className="fas fa-fw fa-receipt"></i>
                             <span className="ml-1">manjemen akun pengguna</span>
                         </a>

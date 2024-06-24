@@ -7,7 +7,7 @@ router.get("/reviews", async (req, res) => {
     let connection;
   
     try {
-      connection = await oracledb.getConnection(dbConfig);
+      connection = await oracledb.getConnection();
   
       const reviewss = await connection.execute(
         `SELECT *

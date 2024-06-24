@@ -4,6 +4,7 @@ import axios from "axios";
 
 function Mobil() {
   const [cars, setCars] = useState([]);
+  const [category, setCategory] = useState([]);
   const [nameCar, setNameCar] = useState("");
   const [color, setColor] = useState("");
   const [tipe, setTipe] = useState("");
@@ -35,6 +36,17 @@ function Mobil() {
         console.error("Error fetching reviews:", error);
       });
   }, []);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/api/mobil/category").then((response) => {
+      if (Array.isArray(response.data.categories)) {
+        setCategory(response.data.categories);
+        console.log("respon data berupa array");
+      } else {
+        console.log("respon bukan array: ", response.data.categories);
+      }
+    });
+  });
 
   const handlingUbah = (id) => {
     const selected = cars.find((car) => car.ID_KENDARAAN === id);
@@ -108,7 +120,7 @@ function Mobil() {
   };
 
   const handleSimpan = () => {
-    console.log("simpan clicked")
+    console.log("simpan clicked");
     const updatedCarData = {
       id: selectedCar.ID_KENDARAAN,
       nameCar: selectedCar.NAMA_KENDARAAN,
@@ -189,9 +201,9 @@ function Mobil() {
                           value={tipe}
                           onChange={(e) => setTipe(e.target.value)}
                         >
-                          {cars.map((car, index) => (
-                            <option key={index} value={car.TIPE_KENDARAAN}>
-                              {car.TIPE_KENDARAAN}
+                          {category.map((kategori, index) => (
+                            <option key={index} value={kategori.TIPE_KATEGORI}>
+                              {kategori.TIPE_KATEGORI}
                             </option>
                           ))}
                         </select>
@@ -530,9 +542,7 @@ function Mobil() {
                           type="number"
                           className="form-control"
                           value={anyBook}
-                          onChange={(e) =>
-                            setAnyBook(parseInt(e.target.value))
-                          }
+                          onChange={(e) => setAnyBook(parseInt(e.target.value))}
                         />
                       </div>
                       <button

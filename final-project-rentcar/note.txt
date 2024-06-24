@@ -1,0 +1,100 @@
+request
+- trigger -v
+- sequence -v
+- monthly report
+
+
+buatkan triger untuk pembuatan id pada tiapa tabel dengan ketentuan dibawah ini
+
+kode UID untuk tiap tabel
+- tabel palanggan (id_pelanggan)
+    USR||"yy"||"3hurufNamaBulan"||seq_pelanggan
+
+- tabel pemesanan (id_pemesanan)
+    PSN||"yy"||"3hurufNamaBulan"||seq_pemsanan
+
+- tabel pembayaran (id_pembayaran)
+    BYR||seq_payment
+
+- tabel kendaraan (id_kendaraan)
+    "id_kategori"||seq_kendaraan
+
+- tabel karyawan (id_karyawan)
+    -- ONR untuk jabatan Owner
+    -- HR untuk jabatan Supervisor
+    -- STF untiuk jabatan Staff
+    "jabatan"||seq_karyawan
+
+- tabel katalog_kendaraan (id_kategori) 
+    -- SUV untuk tipe kendaraan SUV
+    -- SDN untuk tipe kendaraan Sedans
+    -- SPR untuk tipe kendaraan Sports
+    -- HTB untuk tipe kendaraan Hatchback
+    -- MPV untuk tipe kendaraan MPV
+    -- CSO untuk tipe kendaraan Crossover
+
+
+    router.post("/booking", authenticateToken, async (req, res) => {
+  let connection;
+  const bookStatus = "telah dipesan";
+  console.log("booking hit");
+
+  try {
+    connection = await oracledb.getConnection();
+
+    const { carId, pickDate, returnDate, sumPrice, bookDate } = req.body;
+
+    if (!pickDate || !returnDate) {
+      console.log("pick: ", pickDate, " return: ", returnDate);
+      return res.status(400).json({ message: "Tanggal harus diisi" });
+    }
+
+    const idUser = req.user.id_pelanggan; // Mengambil id_pelanggan dari req.user
+
+    console.log("id user dari token: ", idUser);
+
+    // Insert ke tabel pemesanan dengan RETURNING id_pemesanan
+    let result = await connection.execute(
+      `INSERT INTO pemesanan( tanggal_pemesanan, tangga_mulai_sewa, tanggal_akhir_sewa, total, status_pemesanan, pelanggan_id_pelanggan, kendaraan_id_kendaraan)
+      VALUES( TO_DATE(:bookDate, 'YYYY-MM-DD'), TO_DATE(:pickDate, 'YYYY-MM-DD'), TO_DATE(:returnDate, 'YYYY-MM-DD'), :sumPrice, :bookStatus, :idUser, :carId)
+      RETURNING id_pemesanan INTO :bookingID`,
+      {
+        bookDate,
+        pickDate,
+        returnDate,
+        sumPrice,
+        bookStatus,
+        idUser,
+        carId,
+        bookingID: { type: oracledb.NUMBER, dir: oracledb.BIND_OUT }
+      },
+      { autoCommit: true }
+    );
+
+    // Mengambil nilai bookingID dari output
+    const bookingID = result.outBinds.bookingID[0];
+
+    // Insert ke tabel pembayaran dengan menggunakan bookingID yang baru saja didapatkan
+    const payment = await connection.execute(
+      `INSERT INTO pembayaran(jumlah_pembayaran, pemesanan_id_pemesanan)
+      VALUES(:sumPrice, :bookingID)`,
+      { sumPrice, bookingID },
+      { autoCommit: true }
+    );
+
+    res.status(200).json({ message: "Booking berhasil", result });
+    console.log("booking sukses");
+  } catch (err) {
+    console.error("Error executing SQL:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing connection:", err);
+      }
+    }
+  }
+});
+

@@ -46,11 +46,11 @@ function SignIn() {
   //   console.log("Login Sukses")
   //   navigate('/main')
   // }
-  const handleSignUp = () => {
-    // event.preventDefault();
-    console.log("Forgot Password clicked");
-    navigate("/signUp");
-  };
+  // const handleSignUp = () => {
+  //   // event.preventDefault();
+  //   // console.log("Forgot Password clicked");
+  //   navigate("/signUp");
+  // };
 
   // const handleForgotPassword = (event) => {
   //   event.preventDefault();
@@ -62,9 +62,9 @@ function SignIn() {
     <div className="container" style={{ padding: "0px", margin: "0px" }}>
       <div className="form-sect">
         <div className="logo-container">
-          <span>
-            <b>DAFASAN</b> <span>RentCar</span>
-          </span>
+          <span><a href="/main" style={{textDecoration: 'none'}}>
+            <b>PANDAWA</b> <span>RentCar</span>
+            </a></span>
         </div>
         <div className="wrapper-form">
           <div className="mb-3">
@@ -105,7 +105,7 @@ function SignIn() {
         </Link> */}
         <div className="sign-up-section">
           <div className="sign-up-text">Don't Have Account?</div>
-          <Link onClick={handleSignUp}>Sign Up</Link>
+          <Link to={"/signUp"}>Sign Up</Link>
         </div>
       </div>
       <div className="image-column">

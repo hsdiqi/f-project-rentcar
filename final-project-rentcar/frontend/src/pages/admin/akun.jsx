@@ -2,142 +2,134 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NavbarAdmin from "../../components/admin/navbar";
 
-const Pemesan = () => {
-  const [bookings, setBookings] = useState([]);
-  const [bookingID, setBookingID] = useState("");
+function ManajemenAkun() {
+  const [accounts, setAccounts] = useState([]);
   const [userID, setUserID] = useState("");
-  const [paymentID, setPaymentID] = useState("");
   const [namaDepan, setNamaDepan] = useState("");
   const [namaBelakang, setNamaBelakang] = useState("");
+  const [alamat, setAlamat] = useState("");
   const [notelp, setNotelp] = useState("");
-  const [datePick, setDatePick] = useState(null);
-  const [returnDate, setReturnDate] = useState(null);
-  const [statusBooking, setStatusBooking] = useState("");
   const [email, setEmail] = useState("");
-  const [methodPayment, setMethodPayment] = useState("");
-  const [datePayment, setDatePayment] = useState(null);
+  const [nik, setNik] = useState("");
+  const [password, setPassword] = useState("");
+  const [memberID, setMemberID] = useState("");
+  const [pointMember, setPointMember] = useState("");
+  const [jenisMember, setJenisMember] = useState("");
 
   const [selected, setSelected] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/api/listPesanan")
-      .then((response) => {
-        console.log("respon data: ", response.data);
-        if (Array.isArray(response.data.bookings)) {
-          setBookings(response.data.bookings);
-          console.log("respon data berupa array");
-        } else {
-          console.log("respon bukan array: ", response.data.bookings);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching reviews:", error);
-      });
-  }, []);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   useEffect(() => {
     if (selected) {
-      setBookingID(selected.ID_PEMESANAN);
-      setPaymentID(selected.id_pembayaran);
-      setUserID(selected.id_pelanggan);
+      setUserID(selected.ID_PELANGGAN);
       const [firstName, ...lastNameParts] = selected.NAMA_PELANGGAN.split(" ");
       setNamaDepan(firstName);
       setNamaBelakang(lastNameParts.join(" "));
-      setNotelp(selected.TELEPON_PELANGGAN);
-
-      const formatDates = (dateString) => {
-        const date = new Date(dateString);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
-      };
-  
-      setDatePick(formatDates(selected.START_DATE));
-      setReturnDate(formatDates(selected.END_DATE));
-      setStatusBooking(selected.STATUS_PEMESANAN);
-      setEmail(selected.EMAIL_PELANGGAN);
-      setMethodPayment(selected.METODE_PEMBAYARAN);
-      setDatePayment(selected.TANGGAL_PEMBAYARAN);
+      setNotelp(selected.NOMOR_TELEPON);
+      setNik(selected.NIK);
+      setMemberID(selected.MEMBER_ID_PELANGGAN);
+      setPointMember(selected.POINT_MEMBERSHIP);
+      setAlamat(selected.ALAMAT);
+      setEmail(selected.EMAIL);
+      setPassword(selected.PASSWORD);
+      setJenisMember(selected.JENIS_MEMBERSHIP);
     }
   }, [selected]);
 
-  const handlingDelete = (id) => {
+  useEffect(() => {
+    fetchData();
+  }, []); // Fetch data saat komponen dimount
+
+  const fetchData = () => {
     axios
-      .post("http://localhost:3001/api/delBooking", { id })
+      .get("http://localhost:3001/api/listAkun")
       .then((response) => {
-        if (response.status === 200) {
-          alert("berhasil menghapus");
-          setBookings(
-            bookings.filter((booking) => booking.ID_PEMESANAN !== id)
-          );
+        console.log("respon data: ", response.data);
+        if (Array.isArray(response.data.acounts)) {
+          setAccounts(response.data.acounts);
+          console.log("respon data berupa array");
+        } else {
+          console.log("respon bukan array: ", response.data.acounts);
         }
       })
       .catch((error) => {
-        console.error("Error deleting car:", error);
+        console.error("Error fetching accounts:", error);
       });
   };
 
-  const handlingDetail = (id) => {
-    const bookID = bookings.find((booking) => booking.ID_PEMESANAN === id);
-    setSelected(bookID);
+  const hapusHandling = (id) => {
+    axios
+      .post("http://localhost:3001/api/delAccount", { id })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("berhasil menghapus");
+          fetchData();
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting account:", error);
+      });
+  };
+
+  const detailHandling = (id) => {
+    const userID = accounts.find((acounts) => acounts.ID_PELANGGAN === id);
+    setSelected(userID);
     setIsEditing(false);
   };
 
-  const handlingUbah = (id) => {
-    const bookID = bookings.find((booking) => booking.ID_PEMESANAN === id);
-    setSelected(bookID);
+  const ubahHandling = (id) => {
+    const userID = accounts.find((acounts) => acounts.ID_PELANGGAN === id);
+    setSelected(userID);
     setIsEditing(true);
   };
 
-  const handleSimpan = () => {
-    const udateBookingData = {
-      bookingID,
+  const handleSimpan = (id) => {
+    if (jenisMember === "Regular") {
+      setMemberID(1);
+    } else if (jenisMember === "Bronze") {
+      setMemberID(2);
+    } else if (jenisMember === "Silver") {
+      setMemberID(3);
+    } else if (jenisMember === "Gold") {
+      setMemberID(4);
+    } else if (jenisMember === "Platinum") {
+      setMemberID(5);
+    } else {
+      setMemberID(null);
+    }
+
+    const updateUserData = {
       userID,
-      paymentID,
       namaDepan,
       namaBelakang,
+      nik,
       notelp,
-      datePick,
-      returnDate,
-      statusBooking,
       email,
-      methodPayment,
-      datePayment,
+      alamat,
+      password,
+      memberID,
+      pointMember,
     };
 
     axios
-      .post("http://localhost:3001/api/updateBooking", udateBookingData)
+      .post("http://localhost:3001/api/updateAkun", updateUserData)
       .then((response) => {
         if (response.status === 204) {
-          alert("Data mobil berhasil diupdate");
+          alert("Data Pelanggan berhasil diupdate");
           setIsEditing(false);
         }
       })
       .catch((error) => {
         console.error("Error updating pesanan:", error);
       });
+      fetchData();
   };
-
-  const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(dateString).toLocaleDateString("id-ID", options);
-  };
-
-  const isValidDateFormat = (dateString) => {
-    // Regex untuk format YYYY-MM-DD
-    const regex = /^\d{4}-\d{2}-\d{2}$/;
-    return regex.test(dateString);
-  };
-  
-  // penggunaan
-  console.log(isValidDateFormat(datePayment)); 
-  console.log(isValidDateFormat(datePick));
-  console.log(isValidDateFormat(returnDate));
-
-  
 
   return (
     <div id="wrapper">
@@ -149,7 +141,9 @@ const Pemesan = () => {
               <div className="col-sm-12">
                 <div className="clearfix">
                   <div className="float-left">
-                    <h1 className="h3 mb-4 text-gray-800">Pesanan</h1>
+                    <h1 className="h3 mb-4 text-gray-800">
+                      Manajemen Akun Pelanggan
+                    </h1>
                   </div>
                 </div>
                 <hr />
@@ -163,7 +157,7 @@ const Pemesan = () => {
                 <div className="card shadow">
                   <div className="card-header">
                     <h6 className="m-0 font-weight-bold text-primary">
-                      Daftar Pesanan
+                      Daftar Akun
                     </h6>
                   </div>
                   <div className="card-body">
@@ -176,40 +170,41 @@ const Pemesan = () => {
                       <thead>
                         <tr>
                           <th>No</th>
-                          <th>Nama Pemesan</th>
-                          <th>Tanggal pesan</th>
+                          <th>Nama</th>
+                          <th>Email</th>
+                          <th>jenis Member</th>
                           <th>Aksi</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {bookings.map((pesanan, index) => (
-                          <tr key={pesanan.ID_PEMESANAN}>
+                        {accounts.map((acounts, index) => (
+                          <tr key={acounts.ID_PELANGGAN}>
                             <td>{index + 1}</td>
-                            <td>{pesanan.NAMA_PELANGGAN}</td>
-                            <td>{formatDate(pesanan.TANGGAL_PEMESANAN)}</td>
+                            <td>{acounts.NAMA_PELANGGAN}</td>
+                            <td>{acounts.EMAIL}</td>
+                            <td>{acounts.JENIS_MEMBERSHIP}</td>
                             <td>
                               <button
                                 className="btn btn-sm btn-info me-3"
                                 onClick={() =>
-                                  handlingUbah(pesanan.ID_PEMESANAN)
+                                  ubahHandling(acounts.ID_PELANGGAN)
                                 }
                               >
-                                <i className="fa fa-pen"></i> Ubah
+                                <i className="fa fa-eye"></i> Ubah
                               </button>
                               <button
                                 className="btn btn-sm btn-warning me-3"
                                 onClick={() =>
-                                  handlingDetail(pesanan.ID_PEMESANAN)
+                                  detailHandling(acounts.ID_PELANGGAN)
                                 }
                               >
                                 <i className="fa fa-eye"></i> Detail
                               </button>
                               <button
                                 className="btn btn-sm btn-danger"
-                                onClick={() => {
-                                  if (window.confirm("apakah anda yakin?"))
-                                    handlingDelete(pesanan.ID_PEMESANAN);
-                                }}
+                                onClick={() =>
+                                  hapusHandling(acounts.ID_PELANGGAN)
+                                }
                               >
                                 <i className="fa fa-trash"></i> Hapus
                               </button>
@@ -223,7 +218,6 @@ const Pemesan = () => {
               </div>
             </div>
           </div>
-
           {selected && (
             <div className="col-sm-8 m-5">
               <div className="card shadow">
@@ -254,34 +248,16 @@ const Pemesan = () => {
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="warna">Tanggal Ambil</label>
-                        <input
-                          type="date"
-                          className="form-control"
-                          value={datePick}
-                          onChange={(e) => setDatePick(e.target.value)}
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="jumlah_kursi">Tanggal Kembali</label>
-                        <input
-                          type="date"
-                          className="form-control"
-                          value={returnDate}
-                          onChange={(e) => setReturnDate(e.target.value)}
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="no_polisi">Status pemesanan</label>
+                        <label htmlFor="warna">Alamat</label>
                         <input
                           type="text"
                           className="form-control"
-                          value={statusBooking}
-                          onChange={(e) => setStatusBooking(e.target.value)}
+                          value={alamat}
+                          onChange={(e) => setAlamat(e.target.value)}
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="tahun_beli">Nomor Telepon</label>
+                        <label htmlFor="jumlah_kursi">Nomor Telepon</label>
                         <input
                           type="number"
                           className="form-control"
@@ -290,7 +266,7 @@ const Pemesan = () => {
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="service">Email</label>
+                        <label htmlFor="no_polisi">Email</label>
                         <input
                           type="email"
                           className="form-control"
@@ -299,21 +275,39 @@ const Pemesan = () => {
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="speed">Metode Pembayaran</label>
+                        <label htmlFor="tahun_beli">NIK</label>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control"
-                          value={methodPayment}
-                          onChange={(e) => setMethodPayment(e.target.value)}
+                          value={nik}
+                          onChange={(e) => setNik(e.target.value)}
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="harga">Tanggal pembayaran</label>
+                        <label htmlFor="service">Jenis Membership</label>
                         <input
-                          type="date"
+                          type="text"
                           className="form-control"
-                          value={datePayment}
-                          onChange={(e) => setDatePayment(e.target.value)}
+                          value={jenisMember}
+                          onChange={(e) => setJenisMember(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="speed">Point Membership</label>
+                        <input
+                          type="number"
+                          className="form-control"
+                          value={pointMember}
+                          onChange={(e) => setPointMember(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="harga">Password</label>
+                        <input
+                          type="password"
+                          className="form-control"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
                         />
                       </div>
                       <button
@@ -327,22 +321,23 @@ const Pemesan = () => {
                     <div>
                       <h4>Detail</h4>
                       <p>Nama: {selected.NAMA_PELANGGAN}</p>
+                      <p>NIK: {selected.NIK}</p>
+                      <p>Nomor Telepon: {selected.NOMOR_TELEPON}</p>
+                      <p>Email: {selected.EMAIL}</p>
+                      <p>Alamat: {selected.ALAMAT}</p>
+                      <p>Jenis Membership: {selected.JENIS_MEMBERSHIP}</p>
+                      <p>Point Membership: {selected.POINT_MEMBERSHIP}</p>
                       <p>
-                        Tanggal Pesan: {formatDate(selected.TANGGAL_PEMESANAN)}
+                        Password:{" "}
+                        {showPassword ? selected.PASSWORD : "********"}
                       </p>
-                      <p>Nama Kendaraan: {selected.NAMA_KENDARAAN}</p>
-                      <p>Total Bayar: Rp{selected.TOTAL_BAYAR}</p>
-                      <p>Nomor Pelanggan: {selected.TELEPON_PELANGGAN}</p>
-                      <p>Status pemesanan: {selected.STATUS_PEMESANAN}</p>
-                      <p>Metode Pembayaran: {selected.METODE_PEMBAYARAN}</p>
-                      <p>
-                        Tanggal Pembayaran:{" "}
-                        {formatDate(selected.TANGGAL_PEMBAYARAN)}
-                      </p>
-                      <p>
-                        Tanggal Mulai Sewa: {formatDate(selected.START_DATE)}
-                      </p>
-                      <p>Tanggal Akhir Sewa: {formatDate(selected.END_DATE)}</p>
+                      <label>
+                        <input
+                          type="checkbox"
+                          onChange={togglePasswordVisibility}
+                        />{" "}
+                        Tampilkan Kata Sandi
+                      </label>
                     </div>
                   )}
                 </div>
@@ -356,6 +351,6 @@ const Pemesan = () => {
       </a>
     </div>
   );
-};
+}
 
-export default Pemesan;
+export default ManajemenAkun;

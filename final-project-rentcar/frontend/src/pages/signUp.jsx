@@ -67,7 +67,7 @@ function SignUp() {
       <div className="form-sect">
         <div className="logo-container">
           <span>
-            <b>DAFASAN</b> <span>RentCar</span>
+            <b>PANDAWA</b> <span>RentCar</span>
           </span>
         </div>
         <div className="wrapper-form">

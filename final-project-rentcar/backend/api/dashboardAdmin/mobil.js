@@ -3,6 +3,34 @@ const oracledb = require("../../dbConfig");
 
 const router = express.Router();
 
+router.get("/mobil/category", async (req, res) => {
+  let connection;
+
+  try {
+    connection = await oracledb.getConnection();
+
+    const kategori = await connection.execute(
+      `SELECT tipe_kategori FROM katalog_kendaraan`
+    );
+    const result = {
+      categories: kategori.rows
+    }
+
+    res.json(result)
+  } catch (err) {
+    console.error("Error executing SQL:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing connection:", err);
+      }
+    }
+  }
+});
+
 router.get("/mobil", async (req, res) => {
   let connection;
 
@@ -121,14 +149,15 @@ router.post("/delCar", async (req, res) => {
     connection = await oracledb.getConnection();
 
     const { id } = req.body;
-    console.log("id request: ", id)
+    console.log("id request: ", id);
 
     const result = await connection.execute(
       `DELETE FROM kendaraan WHERE ID_KENDARAAN = :id`,
-      { id },{autoCommit: true}
+      { id },
+      { autoCommit: true }
     );
     console.log("Deleted car with ID:", id, result);
-    
+
     res.status(200).json({ message: "Car deleted successfully" });
   } catch (err) {
     console.error(err);
@@ -145,7 +174,19 @@ router.post("/delCar", async (req, res) => {
 });
 
 router.put("/updateCar", async (req, res) => {
-  const { id, nameCar, tipe, color, capacity, nopol, thnBeli, service, speed, harga, anyBook } = req.body;
+  const {
+    id,
+    nameCar,
+    tipe,
+    color,
+    capacity,
+    nopol,
+    thnBeli,
+    service,
+    speed,
+    harga,
+    anyBook,
+  } = req.body;
 
   let connection;
 
@@ -178,12 +219,12 @@ router.put("/updateCar", async (req, res) => {
       speed,
       harga,
       anyBook,
-      id
+      id,
     };
 
     const options = {
       autoCommit: true,
-      outFormat: oracledb.OUT_FORMAT_OBJECT
+      outFormat: oracledb.OUT_FORMAT_OBJECT,
     };
 
     const result = await connection.execute(sql, binds, options);
@@ -204,6 +245,5 @@ router.put("/updateCar", async (req, res) => {
     }
   }
 });
-
 
 module.exports = router;

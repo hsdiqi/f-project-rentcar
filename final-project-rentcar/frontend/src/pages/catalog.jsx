@@ -6,49 +6,94 @@ import "../css/pages/catalog.css";
 const Catalog = () => {
   const navigate = useNavigate();
   const [cars, setCars] = useState([]);
+  const [carCategories, setCarCategories] = useState([]);
   const [sortBy, setSortBy] = useState("price");
-  const [carCategory, setCarCategory] = useState("SUV");
+  const [carCategory, setCarCategory] = useState("Sedan");
+  const [tipeList, setTipeList] = useState("Semua");
+
+  const userId = localStorage.getItem("userId");
+  const accessToken = localStorage.getItem("accessToken");
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/category")
+      .then((response) => {
+        if (Array.isArray(response.data.categories)) {
+          setCarCategories(response.data.categories);
+          console.log("Categories: ", response.data.categories);
+        } else {
+          console.error(
+            "Response data categories bukan array: ",
+            response.data
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching car categories:", error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
       .post("http://localhost:3001/api/carlist", {
         sortBy,
         carCategory,
+        tipeList,
       })
       .then((response) => {
         if (Array.isArray(response.data.cars)) {
           setCars(response.data.cars);
-          console.log("response: ", response.data);
+          console.log("Cars: ", response.data.cars);
         } else {
-          console.error("data response bukan array: ", response.data);
+          console.error("Response data cars bukan array: ", response.data);
         }
       })
       .catch((error) => {
         console.error("Error fetching cars:", error);
       });
-  }, [sortBy, carCategory]);
+  }, [sortBy, carCategory, tipeList]);
 
   const handleBookNow = (id) => {
-    navigate(`/bookingPage?id=${id}`);  
+    if (accessToken && userId) {
+      const car = cars.find((car) => car.ID_KENDARAAN === id);
+      if (car) {
+        if (car.STATUS === "Tidak Tersedia") {
+          alert("Mobil sedang disewa.");
+        } else {
+          navigate(`/bookingPage?id=${id}`);
+        }
+      } else {
+        alert("Mobil tidak ditemukan.");
+      }
+    } else {
+      alert("Anda belum masuk atau mendaftar.");
+      // Redirect to login page or handle authentication state
+    }
   };
 
   return (
     <main className="container">
       <header className="header">
         <h1 className="logo-title">
-          <a href="/main" onClick={navigate}>
-            Dafasan Rentcar
+          <a
+            href="/main"
+            onClick={(e) => e.preventDefault()}
+            style={{ textDecoration: "none" }}
+          >
+            <span style={{ color: "#ffffff" }}>PANDAWA</span> Rentcar
           </a>
         </h1>
-        <button className="logout">Logout</button>
+        {/* <button className="logout">Logout</button> */}
       </header>
       <section className="main-content">
         <div className="content-wrapper">
-          <aside className="filter-section">
-            <section className="filter-wrapper">
-              <h2 className="filter-title">Rental Mobil</h2>
-              <form>
-                <label htmlFor="car-category" className="visually-hidden">
+          <section className="car-section">
+            <section className="car-filter">
+              <div className="sort-options" tabIndex="0">
+                <label
+                  htmlFor="car-category"
+                  // className="visually-hidden"
+                >
                   Kategori Mobil
                 </label>
                 <select
@@ -57,37 +102,26 @@ const Catalog = () => {
                   onChange={(e) => setCarCategory(e.target.value)}
                   value={carCategory}
                 >
-                  <option value="SUV">SUV</option>
-                  <option value="Sedan">Sedans</option>
-                  <option value="Sport">Sport</option>
+                  {carCategories.map((category) => (
+                    <option
+                      key={category.TIPE_KATEGORI}
+                      value={category.TIPE_KATEGORI}
+                    >
+                      {category.TIPE_KATEGORI}
+                    </option>
+                  ))}
                 </select>
-                <label htmlFor="order-date" className="visually-hidden">
-                  Tanggal Ambil
-                </label>
-                <input
-                  type="date"
-                  id="order-date"
-                  className="input-box filter-item"
-                  placeholder="Tanggal Pesan"
-                />
-                <label htmlFor="return-date" className="visually-hidden">
-                  Tanggal Kembali
-                </label>
-                <input
-                  type="date"
-                  id="return-date"
-                  className="input-box filter-item"
-                  placeholder="Tanggal Kembali"
-                />
-                <button className="view-btn" type="submit">
-                  Lihat Mobil
-                </button>
-              </form>
-            </section>
-          </aside>
-          <section className="car-section">
-            <section className="car-filter">
-              <div className="sort-options" tabIndex="0">
+                <label htmlFor="tipe-kategori">Status Ketersediaan</label>
+                <select
+                  name="tipe-list"
+                  id="tipe-list"
+                  onChange={(e) => setTipeList(e.target.value)}
+                  value={tipeList}
+                >
+                  <option value="Tersedia">Tersedia</option>
+                  <option value="Tidak Tersedia">tidak tersedia</option>
+                  <option value="Semua">semua</option>
+                </select>
                 Sort by:
                 <select
                   onChange={(e) => setSortBy(e.target.value)}
@@ -98,7 +132,7 @@ const Catalog = () => {
                   <option value="hPrice">High Price</option>
                 </select>
               </div>
-              <div className="car-list-header"></div>
+              <div className="car-list-header" style={{color: 'white', paddingLeft: '10px'}}>List Kendaraan</div>
               <div className="car-list">
                 <table>
                   <tbody>
@@ -119,8 +153,9 @@ const Catalog = () => {
                                   </h3>
                                   <p className="car-features">
                                     <span>
-                                      Kapasitas:{" "}{car.CAP_PENUMPANG}
-                                      <br/>Tipe Kendaraan:{" "}{car.TIPE_KENDARAAN}
+                                      Kapasitas: {car.CAP_PENUMPANG}
+                                      <br />
+                                      Tipe Kendaraan: {car.TIPE_KENDARAAN}
                                     </span>
                                   </p>
                                 </figcaption>

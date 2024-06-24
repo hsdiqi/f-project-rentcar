@@ -6,11 +6,6 @@ import NavbarAdmin from "../../components/admin/navbar";
 function DashboardAdmin() {
   const [cars, setCars] = useState([]);
   const [orders, setOrders] = useState([]);
-  // const [monthlyData, setMonthlyData] = useState({
-  //   labels: [],
-  //   datasets: [],
-  // });
-  // const chartRef = useRef(null); // Referensi untuk elemen canvas
 
   useEffect(() => {
     fetchData();
@@ -31,58 +26,10 @@ function DashboardAdmin() {
         console.log("Data response bukan array: ", response.data);
       }
 
-      // const monthlySalesResponse = await axios.get(
-      //   "http://localhost:3001/api/monthlySales"
-      // );
-      // const monthlySalesData = monthlySalesResponse.data;
-
-      // const labels = monthlySalesData.map((entry) => entry.BULAN);
-      // const totalPesanan = monthlySalesData.map((entry) => entry.TOTAL_PESANAN);
-      // const totalPembayaran = monthlySalesData.map(
-      //   (entry) => entry.TOTAL_PEMBAYARAN
-      // );
-
-      // setMonthlyData({
-      //   labels: labels,
-      //   datasets: [
-      //     {
-      //       label: "Total Pesanan",
-      //       backgroundColor: "rgba(75,192,192,0.2)",
-      //       borderColor: "rgba(75,192,192,1)",
-      //       borderWidth: 1,
-      //       hoverBackgroundColor: "rgba(75,192,192,0.4)",
-      //       hoverBorderColor: "rgba(75,192,192,1)",
-      //       data: totalPesanan,
-      //     },
-      //     {
-      //       label: "Total Pembayaran",
-      //       backgroundColor: "rgba(255,99,132,0.2)",
-      //       borderColor: "rgba(255,99,132,1)",
-      //       borderWidth: 1,
-      //       hoverBackgroundColor: "rgba(255,99,132,0.4)",
-      //       hoverBorderColor: "rgba(255,99,132,1)",
-      //       data: totalPembayaran,
-      //     },
-      //   ],
-      // });
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-
-  // useEffect(() => {
-  //   if (chartRef && chartRef.current) {
-  //     chartRef.current.chartInstance.destroy(); // Hancurkan instansi chart sebelumnya
-  //   }
-  //   renderChart();
-  // }, [monthlyData]); // Render ulang chart ketika monthlyData berubah
-
-  // const renderChart = () => {
-  //   if (chartRef && chartRef.current && monthlyData.labels.length > 0) {
-  //     const chartInstance = chartRef.current.chartInstance;
-  //     chartInstance.update(); // Update chartInstance yang sudah ada
-  //   }
-  // };
 
   return (
     <div id="wrapper">
@@ -316,28 +263,28 @@ function DashboardAdmin() {
                               <td style={{ lineHeight: "2" }}>Nama</td>
                               <td>:</td>
                               <td>
-                                <b>Hasbi</b>
+                                <b>Admin</b>
                               </td>
                             </tr>
                             <tr>
                               <td style={{ lineHeight: "2" }}>ID Karyawan</td>
                               <td>:</td>
                               <td>
-                                <b>01</b>
+                                <b>STF0005</b>
                               </td>
                             </tr>
                             <tr>
                               <td style={{ lineHeight: "2" }}>Email</td>
                               <td>:</td>
                               <td>
-                                <b>hasbi@gmail.com</b>
+                                <b>admin@gmail.com</b>
                               </td>
                             </tr>
                             <tr>
                               <td style={{ lineHeight: "2" }}>Jabatan</td>
                               <td>:</td>
                               <td>
-                                <b>Raja Iblis</b>
+                                <b>Staff</b>
                               </td>
                             </tr>
                           </tbody>

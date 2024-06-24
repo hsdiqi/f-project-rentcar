@@ -7,7 +7,7 @@ router.post("/signUp", async (req, res) => {
   let connection;
 
   try {
-    connection = await oracledb.getConnection(dbConfig);
+    connection = await oracledb.getConnection();
 
     const { namaDepan, namaBelakang, nik, email, alamat, noTelp, password } =
       req.body;
@@ -58,31 +58,31 @@ router.post("/signUp", async (req, res) => {
       return res.status(409).json({ error: "NIK atau email sudah terdaftar" });
     }
 
-    const seqResult = await connection.execute(
-      `SELECT id_pelanggan
-        FROM (
-          SELECT id_pelanggan
-          FROM pelanggan
-          ORDER BY id_pelanggan DESC
-        )
-        WHERE ROWNUM = 1`
-    );
+    // const seqResult = await connection.execute(
+    //   `SELECT id_pelanggan
+    //     FROM (
+    //       SELECT id_pelanggan
+    //       FROM pelanggan
+    //       ORDER BY id_pelanggan DESC
+    //     )
+    //     WHERE ROWNUM = 1`
+    // );
 
-    const lastId = seqResult.rows[0].ID_PELANGGAN;
+    // const lastId = seqResult.rows[0].ID_PELANGGAN;
 
-    let seqValue;
-    if (lastId != null) {
-      seqValue = lastId + 1;
-    } else {
-      seqValue = lastId;
-    }
-    console.log("SEQ value", seqValue);
+    // let seqValue;
+    // if (lastId != null) {
+    //   seqValue = lastId + 1;
+    // } else {
+    //   seqValue = lastId;
+    // }
+    // console.log("SEQ value", seqValue);
 
     const result = await connection.execute(
-      `INSERT INTO pelanggan (id_pelanggan, nama_depan, nama_belakang, nik, email, alamat, nomor_telepon, password)
-         VALUES (:id_pelanggan, :nama_depan, :nama_belakang, :nik, :email, :alamat, :nomor_telepon, :password)`,
+      `INSERT INTO pelanggan ( nama_depan, nama_belakang, nik, email, alamat, nomor_telepon, password)
+         VALUES ( :nama_depan, :nama_belakang, :nik, :email, :alamat, :nomor_telepon, :password)`,
       {
-        id_pelanggan: seqValue,
+        // id_pelanggan: seqValue,
         nama_depan: namaDepan,
         nama_belakang: namaBelakang,
         nik,

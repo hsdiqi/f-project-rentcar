@@ -9,7 +9,7 @@ import LoginAdmin from "./pages/admin/loginAdmin";
 import DashboardAdmin from "./pages/admin/dashboard";
 import Mobil from "./pages/admin/mobil";
 import Pesanan from "./pages/admin/pesanan";
-
+import ManajemenAkun from "./pages/admin/akun";
 
 function App() {
   // useEffect(() => {
@@ -29,7 +29,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <div style={{width: '100%', height: '100%', margin: '0px', padding: '0px'}}>
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/main" element={<MainPage />} />
@@ -39,8 +39,9 @@ function App() {
           <Route path="/bookingPage" element={<BookingPage />} />
           <Route path="/loginadmin" element={<LoginAdmin />} />
           <Route path="/dashboardAdmin" element={<DashboardAdmin />} />
-          <Route path="/mobil" element = {<Mobil/>}/>
-          <Route path="/pesanan" element={<Pesanan/>}/>
+          <Route path="/mobil" element={<Mobil />} />
+          <Route path="/pesanan" element={<Pesanan />} />
+          <Route path="/manajemenAkun" element={<ManajemenAkun />} />
         </Routes>
       </div>
     </Router>
