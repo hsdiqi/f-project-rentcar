@@ -1,227 +1,354 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
 }
 
 .main-container {
-    background: linear-gradient(180deg, #4bb6d6 40%, #ebf2fa 100%);
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: #ffffff;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #4bb6d6;
+  margin-bottom: 0.5rem;
+}
+
+.header-subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.content {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 30px 30px 0 0;
+  margin-top: -20px;
+  padding: 2rem;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 10;
+}
+
+.image-wrapper {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 249, 250, 0.8));
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.picture-list {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.picture-item {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 1rem;
+  min-width: 80px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #495057;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.picture-item:hover {
+  border-color: #166cf5;
+  background: rgba(22, 108, 245, 0.05);
+  transform: translateY(-2px);
+}
+
+.specs-container {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.specs-container {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 2rem;
+  align-items: start;
+}
+
+.specs-labels,
+.specs-values,
+.specs-symbols {
+  font-size: 1.1rem;
+  line-height: 2;
+}
+
+.specs-labels {
+  font-weight: 600;
+  color: #495057;
+}
+
+.specs-values {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.specs-symbols {
+  font-weight: 600;
+  color: #166cf5;
+}
+
+.form-container {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+}
+
+.form-title,
+.return-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  display: block;
+  position: relative;
+}
+
+.form-title::after,
+.return-title::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(135deg, #166cf5, #4bb6d6);
+  border-radius: 2px;
+}
+
+.date-picker,
+.return-date {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.date-picker:focus,
+.return-date:focus {
+  outline: none;
+  border-color: #166cf5;
+  box-shadow: 0 0 0 3px rgba(22, 108, 245, 0.1);
+}
+
+.booking-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.booking-button {
+  background: linear-gradient(135deg, #166cf5 0%, #4bb6d6 100%);
+  color: #ffffff;
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(22, 108, 245, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.booking-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(22, 108, 245, 0.4);
+}
+
+.booking-button:active {
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content {
+    margin: 1rem;
+    padding: 1.5rem;
+    border-radius: 20px;
   }
 
   .header {
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #000;
-    border: 1px solid #000;
-    background-color: #4bb6d6;
-    width: 100%;
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
-    padding: 20px 15px;
-    font: 600 30px Inter, sans-serif;
-    text-align: center;
-    text-decoration: none;
+    padding: 1rem;
   }
 
   .header-title {
-    font-weight: 900;
-    font-size: 50px;
-    color: rgba(22, 108, 245, 1);
+    font-size: 2rem;
   }
 
   .header-subtitle {
-    font-weight: 900;
-    color: #000;
-    font-size: 20px;
-    
-    
-  }
-
-  @media (max-width: 991px) {
-    .header {
-      max-width: 100%;
-      padding-right: 20px;
-    }
-  }
-
-  .content {
-    border-radius: 50px 50px 0 0;
-    background-color: #a7d9eb;
-    align-self: center;
-    z-index: 10;
-    display: flex;
-    width: 900px;
-    max-width: 100%;
-    flex-direction: column;
-    align-items: center;
-    padding: 29px 63px;
-  }
-
-  @media (max-width: 991px) {
-    .content {
-      padding: 0 20px;
-    }
-  }
-
-  .image-wrapper {
-    background-color: rgba(255, 255, 255, 0.6);
-    align-self: center;
-    display: flex;
-    width: 314px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 1;
-    padding: 0 1px;
-  }
-
-  .image {
-    aspect-ratio: 1.96;
-    object-fit: auto;
-    object-position: center;
-    width: 100%;
-  }
-
-  .picture-list {
-    display: flex;
-    margin-top: 21px;
-    gap: 12px;
-    font-size: 20px;
-    color: #000;
-    font-weight: 500;
-  }
-
-  @media (max-width: 991px) {
-    .picture-list {
-      flex-wrap: wrap;
-      padding-right: 20px;
-    }
-  }
-
-  .picture-item {
-    font-family: Inter, sans-serif;
-    background-color: rgba(255, 255, 255, 0.6);
-    display: flex;
-    align-items: center;
-    width: 100px;
-    justify-content: center;
-    height: 100px;
-    padding: 0 6px;
+    font-size: 1rem;
   }
 
   .specs-container {
-    align-self: flex-start;
-    display: flex;
-    gap: 18px;
-    font-size: 20px;
-    color: #000;
-    font-weight: 500;
-    justify-content: space-between;
-    margin: 19px 0 0 88px;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    text-align: center;
   }
 
-  @media (max-width: 991px) {
-    .specs-container {
-      margin-left: 10px;
-    }
+  .picture-list {
+    gap: 0.5rem;
   }
 
-  .specs-labels {
-    font-family: Inter, sans-serif;
+  .picture-item {
+    min-width: 60px;
+    min-height: 60px;
+    font-size: 0.9rem;
   }
 
-  .specs-values {
-    font-family: Inter, sans-serif;
-  }
-
-  .specs-symbols {
-    font-family: Inter, sans-serif;
-  }
-
-  .form-title {
-    color: #000;
-    text-decoration: underline;
-    margin-top: 24px;
-    font: 500 20px Inter, sans-serif;
-  }
-
-  @media (max-width: 991px) {
-    .form-title {
-      max-width: 100%;
-    }
-  }
-
-  .date-picker {
-    border-radius: 10px;
-    background-color: #fff;
-    align-self: flex-start;
-    width: 440px;
-    max-width: 100%;
-    height: 50px;
-    /* margin-bottom: 4px; */
-  }
-
-  .return-title {
-    color: #000;
-    text-decoration: underline;
-    margin-top: 44px;
-    font: 500 20px Inter, sans-serif;
-  }
-
-  @media (max-width: 991px) {
-    .return-title {
-      max-width: 100%;
-      margin-top: 40px;
-    }
-  }
-
-  .booking-container {
-    margin-left: 88px;
-    display: flex;
-    width: 686px;
-    max-width: 100%;
-    align-items: flex-start;
-    gap: 20px;
-    font-size: 14px;
-    color: #fff;
-    font-weight: 700;
-    justify-content: space-between;
-  }
-
-  @media (max-width: 991px) {
-    .booking-container {
-      flex-wrap: wrap;
-    }
-  }
-
-  .return-date {
-    border-radius: 10px;
-    background-color: #fff;
-    align-self: flex-start;
-    width: 440px;
-    max-width: 100%;
-    height: 50px;
+  .form-container {
+    padding: 1.5rem;
   }
 
   .booking-button {
-    font-family: Inter, sans-serif;
-    border-radius: 15px;
-    background-color: #166cf5;
-    align-self: flex-end;
-    margin-top: 27px;
-    justify-content: center;
-    padding: 8px 23px;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    margin: 0.5rem;
+    padding: 1rem;
   }
 
-  @media (max-width: 991px) {
-    .booking-button {
-      padding: 0 20px;
-    }
+  .image-wrapper {
+    padding: 1rem;
   }
-  .form-container{
-    display: flex;
-    flex-direction: column  ;
-    margin-left: 185px;
+
+  .specs-container {
+    padding: 1rem;
   }
+
+  .form-container {
+    padding: 1rem;
+  }
+
+  .header-title {
+    font-size: 1.5rem;
+  }
+
+  .picture-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .picture-item {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Price highlight animation */
+@keyframes priceHighlight {
+  0%,
+  100% {
+    color: #2c3e50;
+  }
+  50% {
+    color: #166cf5;
+  }
+}
+
+.specs-values {
+  animation: priceHighlight 2s ease-in-out infinite;
+}
+
+/* Loading state for booking button */
+.booking-button.loading {
+  position: relative;
+  color: transparent;
+}
+
+.booking-button.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

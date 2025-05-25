@@ -6,12 +6,13 @@ const port = 3001;
 app.use(cors());
 
 oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
-oracledb.initOracleClient({ libDir: 'C:\\oraclexe\\instantclient_19_23' });
+oracledb.initOracleClient({ libDir: 'C:\\ProgramData\\Oracle\\instantclient_19_23' });
+// C:\ProgramData\Oracle\instantclient_19_23
 
 // Konfigurasi database
 const dbConfig = {
-  user: 'pandawa',         // Ganti dengan username Oracle Anda
-  password: '12345678',     // Ganti dengan password Oracle Anda
+  user: 'rentcar',         // Ganti dengan username Oracle Anda
+  password: 'bee123',     // Ganti dengan password Oracle Anda
   connectString: 'localhost/xe',
   externalAuth: false // Tambahkan opsi ini untuk mode OCI
 

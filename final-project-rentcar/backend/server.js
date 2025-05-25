@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-require('dotenv').config();
+require("dotenv").config();
 
 // const { authenticateToken } = require('./jwtToken'); // Adjust the path as necessary
 
@@ -22,14 +22,15 @@ const booking = require("./api/booking");
 const app = express();
 const port = 3001;
 
-app.use(cors({
-  origin: "http://localhost:3000", // Adjust to your frontend URL
-  credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
+// app.use(cors({
+//   origin: "http://localhost:3001", // Adjust to your frontend URL
+//   credentials: true,
+//   allowedHeaders: ["Content-Type", "Authorization"],
+// }));
 
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(cors());
 
 // Use the login route without authentication
 app.use("/api", login);

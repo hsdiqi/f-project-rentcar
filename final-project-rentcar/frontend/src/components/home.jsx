@@ -1,5 +1,6 @@
 import React from 'react';
 import '../css/pages/index.css';
+// import pajero from '../assets/pajero.png';
 
 function Home() {
   return (

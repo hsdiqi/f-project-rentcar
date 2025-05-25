@@ -19,13 +19,13 @@ function Footer() {
               <address className="contact-details">
                 Contact Info<br /><br />
                 <a href="https://www.google.com/maps/search/?api=1&query=Jl.Trosobo+Utama+Blok+D%2F14" target="_blank" rel="noopener noreferrer">
-                  <img loading="lazy" src="/assets/location.png" className="contact-icon" alt="Location" /> Jl.Trosobo Utama Blok D/14
+                  <img loading="lazy" src="/assets/location.png" className="contact-icon" alt="Location" /> Jl.Malaka No. 110 Malang
                 </a><br /><br />
                 <a href="https://wa.me/628969701669" target="_blank" rel="noopener noreferrer">
                   <img loading="lazy" src="/assets/phone-icon.png" className="contact-icon" alt="Phone" /> 08969701669
                 </a><br /><br />
-                <a href="mailto:rusdany33@gmail.com" target="_blank" rel="noopener noreferrer">
-                  <img loading="lazy" src="/assets/mail-icon.png" className="contact-icon" alt="Email" /> rusdany33@gmail.com
+                <a href="mailto:rentcar@email.com" target="_blank" rel="noopener noreferrer">
+                  <img loading="lazy" src="/assets/mail-icon.png" className="contact-icon" alt="Email" /> rentcar@email.com
                 </a>
               </address>
             </div>

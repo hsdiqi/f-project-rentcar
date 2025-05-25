@@ -24,16 +24,14 @@ function Mobil() {
     axios
       .get("http://localhost:3001/api/mobil")
       .then((response) => {
-        console.log("respon data: ", response.data);
         if (Array.isArray(response.data.cars)) {
           setCars(response.data.cars);
-          console.log("respon data berupa array");
         } else {
           console.log("respon bukan array: ", response.data.cars);
         }
       })
       .catch((error) => {
-        console.error("Error fetching reviews:", error);
+        console.error("Error fetching cars:", error);
       });
   }, []);
 
@@ -41,23 +39,24 @@ function Mobil() {
     axios.get("http://localhost:3001/api/mobil/category").then((response) => {
       if (Array.isArray(response.data.categories)) {
         setCategory(response.data.categories);
-        console.log("respon data berupa array");
       } else {
         console.log("respon bukan array: ", response.data.categories);
       }
     });
-  });
+  }, []);
 
   const handlingUbah = (id) => {
     const selected = cars.find((car) => car.ID_KENDARAAN === id);
     setSelectedCar(selected);
     setIsEditing(true);
+    console.log(selected); 
   };
 
   const handlingDetail = (id) => {
     const selected = cars.find((car) => car.ID_KENDARAAN === id);
     setSelectedCar(selected);
     setIsEditing(false);
+    console.log(selected);
   };
 
   const handlingHapus = (id) => {
@@ -77,33 +76,33 @@ function Mobil() {
   const addHandling = (event) => {
     event.preventDefault();
 
-    const carData = {
-      nameCar,
-      tipe,
-      color,
-      capacity,
-      nopol,
-      thnBeli,
-      foto,
-      service,
-      speed,
-      harga,
-    };
+    const formData = new FormData();
+    formData.append("nameCar", nameCar);
+    formData.append("tipe", tipe);
+    formData.append("color", color);
+    formData.append("capacity", capacity);
+    formData.append("nopol", nopol);
+    formData.append("thnBeli", thnBeli);
+    formData.append("foto", foto);
+    formData.append("service", service);
+    formData.append("speed", speed);
+    formData.append("harga", harga);
 
     axios
-      .post("http://localhost:3001/api/addCar", carData)
+      .post("http://localhost:3001/api/addCar", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((response) => {
-        console.log("sukses");
         if (response.status === 201) {
           alert("sukses");
           clearForm();
-          setCars([...cars, response.data.car]); // Assuming response.data.car contains the newly added car
+          setCars([...cars, response.data.car]);
         }
-        // Lakukan apa pun setelah berhasil
       })
       .catch((err) => {
-        console.log("server bermasalah");
-        console.error(err);
+        console.error("Error uploading car:", err);
       });
   };
 
@@ -120,7 +119,6 @@ function Mobil() {
   };
 
   const handleSimpan = () => {
-    console.log("simpan clicked");
     const updatedCarData = {
       id: selectedCar.ID_KENDARAAN,
       nameCar: selectedCar.NAMA_KENDARAAN,
@@ -132,21 +130,14 @@ function Mobil() {
       service: selectedCar.TERAKHIR_SERVICE,
       speed: selectedCar.TOP_SPEED,
       harga: selectedCar.HARGA,
-      anyBook: parseInt(anyBook), // Convert anyBook to integer
+      anyBook: parseInt(anyBook),
     };
 
     axios
-      .put(`http://localhost:3001/api/updateCar`, updatedCarData)
+      .put("http://localhost:3001/api/updateCar", updatedCarData)
       .then((response) => {
         if (response.status === 204) {
           alert("Data mobil berhasil diupdate");
-          // setCars(
-          //   cars.map((car) =>
-          //     car.ID_KENDARAAN === selectedCar.ID_KENDARAAN
-          //       ? { ...car, ...updatedCarData }
-          //       : car
-          //   )
-          // );
           setIsEditing(false);
         }
       })

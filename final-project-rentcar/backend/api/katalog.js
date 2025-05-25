@@ -41,15 +41,15 @@ router.post("/carlist", async (req, res) => {
     const { sortBy, carCategory, tipeList } = req.body;
     console.log(sortBy, carCategory, tipeList);
 
-    let showByClause = "";
+    let showByClause = "AND STATUS != 'Deleted'"; 
+
     if (tipeList === "Tersedia") {
-      showByClause = "AND status = 'Tersedia'";
+      showByClause += " AND STATUS = 'Tersedia'";
     } else if (tipeList === "Tidak Tersedia") {
-      showByClause = "AND status = 'Tidak Tersedia'";
-    } else {
-      showByClause = " ";
+      showByClause += " AND STATUS = 'Tidak Tersedia'";
     }
 
+    // Sorting
     let orderByClause = "";
     if (sortBy === "lPrice") {
       orderByClause = "ORDER BY HARGA ASC";
@@ -57,29 +57,38 @@ router.post("/carlist", async (req, res) => {
       orderByClause = "ORDER BY HARGA DESC";
     }
 
-    let query = `
+    const query = `
       SELECT * 
       FROM v_list_car_katalog
       WHERE TIPE_KENDARAAN = :carCategory ${showByClause}
       ${orderByClause}
     `;
 
-    const result = await connection.execute(query, { carCategory });
+    const result = await connection.execute(
+      query,
+      { carCategory },
+      { outFormat: oracledb.OUT_FORMAT_OBJECT }
+    );
 
-    const listResult = {
-      cars: result.rows,
-    };
+    // Konversi foto ke base64
+    const cars = result.rows.map((row) => {
+      let fotoBase64 = "";
+      if (row.FOTO_KENDARAAN) {
+        const buffer = row.FOTO_KENDARAAN;
+        fotoBase64 = `data:image/jpeg;base64,${Buffer.from(buffer).toString("base64")}`;
+      }
 
-    // console.log(listResult);
+      return {
+        ...row,
+        FOTO_KENDARAAN: fotoBase64,
+      };
+    });
 
-    // Kirim hasil kueri sebagai respons
-    res.json(listResult);
+    res.json({ cars });
   } catch (err) {
-    // Tangani kesalahan
     console.error("Error executing SQL:", err);
     res.status(500).json({ error: "Internal Server Error" });
   } finally {
-    // Pastikan koneksi ditutup setelah digunakan
     if (connection) {
       try {
         await connection.close();
@@ -89,5 +98,6 @@ router.post("/carlist", async (req, res) => {
     }
   }
 });
+
 
 module.exports = router;

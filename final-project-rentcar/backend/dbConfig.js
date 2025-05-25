@@ -1,12 +1,13 @@
 const oracledb = require('oracledb');
 
 oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
-oracledb.initOracleClient({ libDir: "C:\\instanclient\\instantclient_19_23" });
+// oracledb.initOracleClient({ libDir: "C:\\instanclient\\instantclient_19_23" });
+oracledb.initOracleClient({ libDir: "C:\\ProgramData\\Oracle\\instantclient_19_23" });
 
 // Assuming you have your database configuration in a separate file or constants
 const dbConfig = {
-    user: "pandawa",
-    password: "12345678",
+    user: "rentcar",
+    password: "bee123",
     connectString: "localhost/xe",
     externalAuth: false,
 };

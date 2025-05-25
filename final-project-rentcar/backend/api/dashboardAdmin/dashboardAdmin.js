@@ -16,7 +16,7 @@ router.get("/DashBoardAdmin", async (req, res) => {
   try {
     connection = await oracledb.getConnection();
 
-    const cars = await connection.execute(`SELECT * FROM kendaraan`);
+    const cars = await connection.execute(`SELECT * FROM kendaraan where status != 'Tidak Aktif'`);
     const orders = await connection.execute(`SELECT * FROM v_pesanan`);
 
     const result = {

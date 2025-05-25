@@ -2,7 +2,7 @@
 
 - Pastikan sudah download [node.js](https://nodejs.org/dist/v22.3.0/node-v22.3.0-x64.msi)
 - Pastikan sudah download [instan client](https://download.oracle.com/otn_software/nt/instantclient/1923000/instantclient-basic-windows.x64-19.23.0.0.0dbru.zip)
-
+- untuk instan client jangan lupa masukkan path instalasi ke environment variable dan tulis di path di file dbconfig backend
 ## Steps
 
 ### setup frontend

@@ -1,34 +1,49 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "../css/pages/index.css";
+"use client"
+
+import { useState, useEffect } from "react"
+import axios from "axios"
+import "../css/pages/index.css"
 
 function generateLoremIpsum() {
-  return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec odio eget urna fringilla gravida sed eu libero. Sed non risus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Aliquam erat volutpat. Aenean id metus id velit ullamcorper pulvinar. Nullam ac nisi non eros gravida tempor. Morbi mollis tellus ac sapien. Aliquam erat volutpat. Aenean id metus id velit ullamcorper pulvinar. Nullam ac nisi non eros gravida tempor. Morbi mollis tellus ac sapien.";
+  return "Pelayanan yang sangat memuaskan! Mobil dalam kondisi prima dan proses booking sangat mudah. Tim customer service sangat responsif dan membantu. Pengalaman rental yang tak terlupakan, pasti akan menggunakan jasa ini lagi di masa depan."
 }
 
 function Reviews() {
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/reviews")
       .then((response) => {
-        console.log("Data response:", response.data); // Tambahkan log untuk melihat data respons
+        console.log("Data response:", response.data)
         if (Array.isArray(response.data.reviewss)) {
-          setReviews(response.data.reviewss); // Mengatur data review ke state reviews
+          setReviews(response.data.reviewss)
         } else {
-          console.error("Data response bukan array:", response.data);
+          console.error("Data response bukan array:", response.data)
         }
+        setLoading(false)
       })
       .catch((error) => {
-        console.error("Error fetching reviews:", error);
-      });
-  }, []);
+        console.error("Error fetching reviews:", error)
+        setLoading(false)
+      })
+  }, [])
+
+  if (loading) {
+    return (
+      <nav id="Review" className="review">
+        <div className="loading-state">
+          <div className="spinner"></div>
+        </div>
+      </nav>
+    )
+  }
 
   return (
     <nav id="Review" className="review">
       {reviews.slice(0, 4).map((review, index) => (
-        <div key={index} className="card card-custom">
+        <div key={index} className="card card-custom fade-in-up">
           <div className="sec">
             <div>
               <img
@@ -50,7 +65,7 @@ function Reviews() {
         </div>
       ))}
     </nav>
-  );
+  )
 }
 
-export default Reviews;
+export default Reviews

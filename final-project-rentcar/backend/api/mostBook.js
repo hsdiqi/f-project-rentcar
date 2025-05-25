@@ -15,7 +15,7 @@ router.get("/mostbook", async (req, res) => {
            FROM V_KENDARAAN_MOSTBOOK
            ORDER BY BANYAK_SEWA DESC
          )
-         WHERE ROWNUM <= 3`
+         WHERE status != 'Deleted' AND ROWNUM <= 3`
       );
   
       const result = {
